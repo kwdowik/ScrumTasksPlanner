@@ -1,0 +1,28 @@
+{
+  "tasks": [
+    {
+      "url": "http://sample.com/task1",
+      "createDate": "11-01-2017",
+      "priority": "low",
+      "name": "task1",
+      "state": "in progress",
+      "id": 1
+    },
+    {
+      "url": "http://sample.com/task2",
+      "createDate": "11-01-2017",
+      "priority": "high",
+      "name": "task2",
+      "state": "done",
+      "id": 2
+    },
+    {
+      "id": 3,
+      "url": "http://sample.com/task3",
+      "createDate": "11-01-2017",
+      "priority": "medium",
+      "name": "task3",
+      "state": "new"
+    }
+  ]
+}
