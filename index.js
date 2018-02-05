@@ -1,4 +1,8 @@
 import { AppRegistry } from 'react-native';
-import App from './App';
+import Root from './src/Root';
+import React from 'react';
 
-AppRegistry.registerComponent('ScrumTasksPlanner', () => App);
+
+AppRegistry.registerComponent('ScrumTasksPlanner', () => Root );
+
+
