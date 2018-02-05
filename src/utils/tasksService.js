@@ -1,12 +1,3 @@
-// import _tasks from '../../db.json';
-//
-// const TIMEOUT = 200;
-//
-// export default {
-//     getTasks: () =>
-//     saveTask: (cb, timeout) => setTimeout((task) => cb(_tasks.tasks.push(task)), timeout || TIMEOUT)
-// }
-
 import axios from 'axios';
 
 export const getTasks = () => axios.get('http://localhost:3000/tasks')
