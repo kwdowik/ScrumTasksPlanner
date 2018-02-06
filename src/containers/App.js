@@ -1,14 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import {
     StyleSheet,
     View
 } from 'react-native';
 import { NativeRouter, Link } from 'react-router-native'
-import { Text } from 'react-native';
+import { Text } from 'react-native'
 import { Navigation, Card } from 'react-router-navigation'
-import TasksPage  from './TasksPage';
-import TaskDetailsPage from "./TaskDetailsPage";
-
+import TasksPage  from './TasksPage'
+import TaskDetailsPage from './TaskDetailsPage'
 
 export const App = () => (
      <NativeRouter>
@@ -52,5 +51,4 @@ const styles = StyleSheet.create({
         margin: 20,
     },
 });
-
 

@@ -7,7 +7,7 @@ export const Task = ({task}) => (
     <ListItem
         roundAvatar
         containerStyle={{backgroundColor: '#F5FCFF'}}
-        avatar={getStyleForTaskState(task.state)}
+        avatar={task.userImg}
         title={
             <Badge containerStyle={{backgroundColor: '#e6e6e6'}}>
                 <Text style={{color: '#68c2ee'}}>{task.name}</Text>
@@ -17,9 +17,6 @@ export const Task = ({task}) => (
             <View style={styles.subtitleView}>
                 <Text style={getTaskPriorityStyle(task.priority)}>
                     {task.priority}
-                </Text>
-                <Text style={styles.dateText}>
-                    create: {task.createDate}
                 </Text>
             </View>
         }
@@ -52,7 +49,7 @@ styles = StyleSheet.create({
 });
 
 function getTaskPriorityStyle(priority) {
-    switch(priority){
+    switch(priority.toLowerCase()){
         case 'high': return styles.highPriority;
         case 'medium': return styles.mediumPriority;
         case 'low': return styles.lowPriority;
@@ -60,7 +57,7 @@ function getTaskPriorityStyle(priority) {
 }
 
 function getStyleForTaskState(state) {
-    switch(state){
+    switch(state.toLowerCase()){
         case 'in progress': return <Icon name="build" color='orange'/>;
         case 'done': return <Icon name="check-circle" color='green'/>;
         case 'new': return  <Icon name="fiber-new" color="grey"/>;

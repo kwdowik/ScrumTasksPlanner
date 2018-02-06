@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { View, StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { TaskList } from '../components/TaskList';
 import { taskDetails } from "../actions/index";
 
-
-const TasksPage = ({tasks, dispatch}) => {
+const TasksPage = ({tasks, dispatch, history}) => {
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
             <TaskList
                 onPress={task => dispatch(taskDetails(task))}
                 tasks={tasks}
+                history={history}
             />
-        </View>
+        </ScrollView>
     );
 };
 

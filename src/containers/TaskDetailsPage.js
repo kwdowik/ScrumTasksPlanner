@@ -3,17 +3,24 @@ import PropTypes from 'prop-types';
 import { View, StyleSheet } from 'react-native';
 import { TaskDetails } from '../components/TaskDetails';
 import { connect } from 'react-redux';
-import { saveTask, editTaskPropertyValue } from '../actions/index';
+import { saveTask, editTaskPropertyValue, deleteTask } from '../actions/index';
 import { getOneTask, getEditableState } from '../reducers/tasks'
 
-const TaskDetailsPage = ({task, editable, dispatch}) => {
+const TaskDetailsPage = ({task, editable, dispatch, history}) => {
     return (
         <View style={styles.container}>
             <TaskDetails
                 task = {task}
+                onDelete = {(task) => {
+                    dispatch(deleteTask(task));
+                    history.goBack()
+                }}
                 editable = {editable}
                 onEdit = {(value, name) => dispatch(editTaskPropertyValue(value, name))}
-                onSave = {(task) => dispatch(saveTask(task))}
+                onSave = {(task) => {
+                    dispatch(saveTask(task));
+                    history.goBack()
+                }}
             />
         </View>
     )
