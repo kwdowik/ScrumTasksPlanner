@@ -1,28 +1,40 @@
 {
   "tasks": [
     {
-      "url": "http://sample.com/task1",
-      "createDate": "11-01-2017",
-      "priority": "low",
-      "name": "task1",
-      "state": "in progress",
-      "id": 1
-    },
-    {
       "url": "http://sample.com/task2",
       "createDate": "11-01-2017",
       "priority": "high",
-      "name": "task2",
+      "name": "task4",
+      "userImg": "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
       "state": "done",
       "id": 2
     },
     {
-      "id": 3,
       "url": "http://sample.com/task3",
       "createDate": "11-01-2017",
       "priority": "medium",
-      "name": "task3",
-      "state": "new"
+      "name": "Add screen to display all passangers",
+      "userImg": "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+      "state": "new",
+      "id": 3
+    },
+    {
+      "url": "Http://localhost/task4",
+      "createDate": "30-01-2018",
+      "priority": "High",
+      "name": "Task4",
+      "userImg": "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+      "state": "Done",
+      "id": 4
+    },
+    {
+      "url": "Http://localhost.com",
+      "createDate": "12-03-1994",
+      "priority": "High",
+      "name": "Task5",
+      "userImg": "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg",
+      "state": "In progress",
+      "id": 90756
     }
   ]
 }
