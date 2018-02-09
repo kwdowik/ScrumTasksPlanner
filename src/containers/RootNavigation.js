@@ -1,28 +1,20 @@
 import React, { Component } from 'react'
-import {
-    StyleSheet,
-    View
-} from 'react-native';
-import { NativeRouter, Link } from 'react-router-native'
-import { Text } from 'react-native'
+import { NativeRouter } from 'react-router-native'
 import { Navigation, Card } from 'react-router-navigation'
+
 import TasksPage  from './TasksPage'
 import TaskDetailsPage from './TaskDetailsPage'
+import SignInPage from './SignInPage'
+import SingUpPage from './SingUpPage'
 
-export const App = () => (
+export const RootNavigation = () => (
      <NativeRouter>
         <Navigation>
             <Card
                 exact
                 path="/"
-                title="Index"
-                render={() => (
-                    <View style={styles.scene}>
-                        <Link to='/tasks'>
-                            <Text>Push a new scene</Text>
-                        </Link>
-                    </View>
-                )}
+                title="Scrum Planner"
+                component={SignInPage}
                 />
             <Card
                 exact
@@ -36,19 +28,12 @@ export const App = () => (
                 title="Task Details"
                 component={TaskDetailsPage}
             />
+            <Card
+                exact
+                path="/singUp"
+                title="Sing up"
+                component={SingUpPage}
+            />
         </Navigation>
      </NativeRouter>
 );
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#F5FCFF',
-    },
-    welcome: {
-        fontSize: 20,
-        textAlign: 'center',
-        margin: 20,
-    },
-});
-
