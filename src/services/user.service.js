@@ -1,5 +1,5 @@
 import axios from 'axios';
-// import bcrypt from 'bcrypt';
+import bcrypt from 'react-native-bcrypt';
 import { guid } from './utils/guid';
 
 const BASE_URL = 'http://localhost:3000/users/';
@@ -26,41 +26,48 @@ const addUser  = user => axios.post(BASE_URL, {
     });
 
 const registerUser = user => {
-    return isUserAlreadyExist(user)
-        .then(isUserExist => {
-            if(!isUserExist) addUser(user);
-            return isUserExist;
+    return isUserAlreadyExist(user.username)
+        .then(foundedUser => {
+            if(foundedUser === undefined) {
+                hashPassword(user.password).then(hashedPassword => {
+                    user.password = hashedPassword;
+                    addUser(user);
+                })
+            }
+            return foundedUser;
         }).catch(err => {
             return err
         });
 };
 
-const isUserAlreadyExist = user => {
+const isUserAlreadyExist = username => {
     return getUsers().then(users => {
-        let u = users.filter(u => u.username === user.username)
-        return u.length > 0;
+        let u = users.filter(u => u.username === username);
+        return u[0];
     }).catch(err => {
         return err
     });
 };
 
-
-
 const isAuthenticate = (username, password) => {
-    let promise = getUsers().then(users => {
-        let user = users.filter(u => u.username === username && u.password === password);
-        return user[0]
-    }).catch(err => {
+    return isUserAlreadyExist(username)
+        .then(foundedUser => {
+            if(foundedUser) {
+                return encryptPassword(password, foundedUser.password).then(validPassword => {
+                    alert(`foundedUser: ${validPassword}`)
+                    if(validPassword) return foundedUser;
+                })
+            }
+            }
+        ).catch(err => {
         return err
     });
-    return promise
-
 };
 
 const hashPassword = (password) => {
     return new Promise(
         function (resolve, reject) {
-            bcrypt.genSalt(10, function (err, salt) {
+            bcrypt.genSalt(10, (err, salt) => {
                     bcrypt.hash(password, salt, function (err, hash) {
                         if(err) reject(err);
                         resolve(hash.toString());
@@ -73,7 +80,7 @@ const hashPassword = (password) => {
 const encryptPassword = (password, userpassword) => {
     return new Promise(
         function (resolve, reject) {
-            bcrypt.compare(password, userpassword, function(err, response) {
+            bcrypt.compare(password, userpassword, (err, response) => {
                 if(err) reject(err);
                 resolve(response);
             })
@@ -84,5 +91,6 @@ const encryptPassword = (password, userpassword) => {
 export default {
     registerUser: registerUser,
     isAuthenticate: isAuthenticate,
-    getUsers: getUsers
+    getUsers: getUsers,
+    hashPassword: hashPassword
 }
