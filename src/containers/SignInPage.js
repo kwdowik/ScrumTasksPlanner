@@ -44,7 +44,7 @@ const SignInPage = ({history, dispatch, user, errorMessage}) => {
             <Button
                 buttonStyle={styles.buttonStyle}
                 onPress={() => {
-                    dispatch(clearLoginProperties);
+                    dispatch(clearLoginProperties());
                     dispatch(setErrorMessage(''));
                     history.push('/singUp');
                 }}
