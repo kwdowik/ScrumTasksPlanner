@@ -1,9 +1,9 @@
 import axios from 'axios';
+import { guid } from './utils/guid';
 
-const URL = 'http://localhost:3000/tasks/';
+const BASE_URL = 'http://localhost:3000/tasks/';
 
-
-const getTasks = () => axios.get(URL)
+const getTasks = () => axios.get(BASE_URL)
     .then(response => {
         return response.data
     })
@@ -11,7 +11,7 @@ const getTasks = () => axios.get(URL)
         return error
     });
 
-const updateTask = task => axios.patch(URL+task.id, {
+const updateTask = task => axios.patch(`${BASE_URL+task.id}`, {
     url: task.url,
     createDate: task.createDate,
     priority: task.priority,
@@ -25,9 +25,10 @@ const updateTask = task => axios.patch(URL+task.id, {
         return error
     });
 
-const createTask = task => axios.post(URL, {
-    id: Math.floor((Math.random() * 100000) + 1),
+const createTask = task => axios.post(BASE_URL, {
+    id: guid(),
     url: task.url,
+    projectName: task.projectName,
     createDate: task.createDate,
     priority: task.priority,
     name: task.name,
@@ -40,7 +41,7 @@ const createTask = task => axios.post(URL, {
         return error
     });
 
-const removeTask = task => axios.delete(URL+task.id)
+const removeTask = task => axios.delete(`${BASE_URL+task.id}`)
     .then(response => response)
     .catch(err => err);
 
@@ -51,3 +52,5 @@ export default {
     updateTask: updateTask,
     getTasks: getTasks
 }
+
+
