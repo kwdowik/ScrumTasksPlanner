@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { View, StyleSheet } from 'react-native';
 import { TaskDetails } from '../components/TaskDetails';
 import { connect } from 'react-redux';
-import { saveTask, editTaskPropertyValue, deleteTask } from '../actions/index';
+import { saveTask, editTaskPropertyValue, deleteTask } from '../actions/tasks';
 import { getOneTask, getEditableState } from '../reducers/tasks'
 
 const TaskDetailsPage = ({task, editable, dispatch, history}) => {
@@ -28,10 +28,10 @@ const TaskDetailsPage = ({task, editable, dispatch, history}) => {
 
 TaskDetailsPage.propTypes = {
     task: PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        url: PropTypes.string.isRequired,
+        id: PropTypes.string,
+        url: PropTypes.string,
         priority: PropTypes.string.isRequired,
-        createDate: PropTypes.string.isRequired,
+        createDate: PropTypes.string,
         name: PropTypes.string.isRequired,
         state: PropTypes.string.isRequired
     }).isRequired
