@@ -1,22 +1,14 @@
 {
   "tasks": [
     {
-      "url": "http://sample.com/task2",
-      "createDate": "11-01-2017",
-      "priority": "high",
-      "name": "task4",
-      "userImg": "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-      "state": "done",
-      "id": 2
-    },
-    {
       "url": "http://sample.com/task3",
       "createDate": "11-01-2017",
       "priority": "medium",
-      "name": "Add screen to display all passangers",
+      "name": "Add screen to display all passanger",
       "userImg": "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
       "state": "new",
-      "id": 3
+      "projectName": "project1",
+      "id": "2312"
     },
     {
       "url": "Http://localhost/task4",
@@ -25,7 +17,8 @@
       "name": "Task4",
       "userImg": "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
       "state": "Done",
-      "id": 4
+      "projectName": "project1",
+      "id": "12321"
     },
     {
       "url": "Http://localhost.com",
@@ -34,7 +27,48 @@
       "name": "Task5",
       "userImg": "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg",
       "state": "In progress",
-      "id": 90756
+      "projectName": "project2",
+      "id": "012312"
+    },
+    {
+      "id": "e2ca939c-1a64-0597-edbf-594def85c2eb",
+      "priority": "new",
+      "name": "Task12",
+      "state": "medium"
+    },
+    {
+      "id": "42d3f913-987a-18a5-8b8a-5932d5d80258",
+      "projectName": "project1",
+      "priority": "in progress",
+      "name": "Task15",
+      "state": "low"
+    },
+    {
+      "id": "445e2af1-268c-d1d6-4d18-e7374a28039e",
+      "projectName": "project2",
+      "priority": "high",
+      "name": "TestTask",
+      "state": "new"
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "projectName": "project1",
+      "username": "Test1",
+      "password": "TestPassword1"
+    },
+    {
+      "id": "2",
+      "projectName": "project1",
+      "username": "Test2",
+      "password": "TestPassword2"
+    },
+    {
+      "id": "3",
+      "projectName": "project2",
+      "username": "Test",
+      "password": "Test"
     }
   ]
 }
