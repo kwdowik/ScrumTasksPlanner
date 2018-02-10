@@ -1,5 +1,6 @@
 import * as types from '../constans/ActionTypes';
 import userService from '../services/user.service';
+import { addNewProject } from "./projects";
 
 export const tryLogin = (user, dispatch) => {
     return userService.isAuthenticate(user.username, user.password)
@@ -21,6 +22,7 @@ export const clearLoginProperties = () => dispatch => {
 };
 
 export const tryRegisterUser = (user, dispatch) => {
+    addNewProject(user.projectName);
     return userService.registerUser(user)
         .then(isUserExist => {
             isUserExist ? dispatch(setErrorMessage('User already exists')) :
@@ -39,26 +41,19 @@ export const editUserPropertyValue = (value, name) => (
 );
 
 export const setUser = user => (
-    console.log(`action -> setUser`),
         {
             type: types.SET_USER,
             user
         }
 );
 
+
+
 export const setErrorMessage = errorMsg => (
-    console.log(`action -> userInvalid`),
         {
             type: types.INVALID_USER,
             errorMsg
         }
 );
-
-export const userRegistered = () => (
-    {
-        type: types.USER_REGISTERED
-    }
-)
-
 
 
