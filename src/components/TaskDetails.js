@@ -33,12 +33,14 @@ export const TaskDetails = ({task, projects, editable, onEdit, onSave, onDelete}
                value={task.state}
                onChangeText={e => onEdit(e, 'state')}
            />
-            {/*<FormLabel>Create date</FormLabel>*/}
-            {/*<FormInput*/}
-                {/*inputStyle={styles.formInput}*/}
-                {/*value={task.createDate}*/}
-                {/*onChangeText={e => onEdit(e, 'createDate')}*/}
-            {/*/>*/}
+            {task.createDate && (
+                <FormLabel>Create date</FormLabel>,
+                <FormInput
+                    inputStyle={styles.formInput}
+                    value={task.createDate}
+                    />
+                )
+            }
             <FormLabel>Assigned</FormLabel>
             <FormInput
                 inputStyle={styles.formInput}
@@ -99,6 +101,7 @@ const dropdownProjectData = projects => {
     });
     return dates;
 };
+
 const requiredPropertiesAreFillIn = task => (
         task.name !== undefined &&
         task.projectName !== undefined &&
