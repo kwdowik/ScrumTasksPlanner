@@ -12,8 +12,9 @@ const getTasks = () => axios.get(BASE_URL)
     });
 
 const updateTask = task => axios.patch(`${BASE_URL+task.id}`, {
-    url: task.url,
+    assignedTo: task.assignedTo,
     createDate: task.createDate,
+    projectName: task.projectName,
     priority: task.priority,
     name: task.name,
     state: task.state
@@ -27,7 +28,7 @@ const updateTask = task => axios.patch(`${BASE_URL+task.id}`, {
 
 const createTask = task => axios.post(BASE_URL, {
     id: guid(),
-    url: task.url,
+    assignedTo: task.assignedTo,
     projectName: task.projectName,
     createDate: task.createDate,
     priority: task.priority,

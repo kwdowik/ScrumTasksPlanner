@@ -22,12 +22,14 @@ export const TaskDetails = ({task, editable, onEdit, onSave, onDelete}) => {
                 label='Priority'
                 containerStyle={styles.dropdownStyle}
                 data={dropdownPriorityData()}
+                value={task.priority}
                 onChangeText={e => onEdit(e, 'priority')}
             />
            <Dropdown
                label='State'
                containerStyle={styles.dropdownStyle}
                data={dropdownStateData()}
+               value={task.state}
                onChangeText={e => onEdit(e, 'state')}
            />
             <FormLabel>Create date</FormLabel>
@@ -36,11 +38,11 @@ export const TaskDetails = ({task, editable, onEdit, onSave, onDelete}) => {
                 value={task.createDate}
                 onChangeText={e => onEdit(e, 'createDate')}
             />
-            <FormLabel>Url</FormLabel>
+            <FormLabel>Assigned</FormLabel>
             <FormInput
                 inputStyle={styles.formInput}
-                value={task.url}
-                onChangeText={e => onEdit(e, 'url')}
+                value={task.assignedTo}
+                onChangeText={e => onEdit(e, 'assignedTo')}
             />
             <Button
                 disabled={!editable || !requiredPropertiesAreFillIn(task)}

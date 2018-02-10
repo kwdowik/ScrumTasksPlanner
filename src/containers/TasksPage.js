@@ -30,7 +30,7 @@ const TasksPage = ({tasks, dispatch, history}) => {
 TasksPage.propTypes = {
     tasks: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.string.isRequired,
-        url: PropTypes.string.isRequired,
+        assignedTo: PropTypes.string.isRequired,
         priority: PropTypes.string.isRequired,
         createDate: PropTypes.string.isRequired,
         name: PropTypes.string.isRequired,
