@@ -16,6 +16,7 @@ const addUser  = user => axios.post(BASE_URL, {
         id: guid(),
         username: user.username,
         password: user.password,
+        createDate: new Date().toLocaleString(),
         projectName: user.projectName
     })
     .then(response => {

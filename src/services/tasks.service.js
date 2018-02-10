@@ -30,7 +30,7 @@ const createTask = task => axios.post(BASE_URL, {
     id: guid(),
     assignedTo: task.assignedTo,
     projectName: task.projectName,
-    createDate: task.createDate,
+    createDate: new Date().toLocaleString(),
     priority: task.priority,
     name: task.name,
     state: task.state
