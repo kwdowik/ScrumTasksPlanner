@@ -54,7 +54,6 @@ const isAuthenticate = (username, password) => {
         .then(foundedUser => {
             if(foundedUser) {
                 return encryptPassword(password, foundedUser.password).then(validPassword => {
-                    alert(`foundedUser: ${validPassword}`)
                     if(validPassword) return foundedUser;
                 })
             }
