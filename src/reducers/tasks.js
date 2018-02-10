@@ -73,8 +73,11 @@ export const getOneTask = (state) => {
 };
 
 export const getTasksForCurrentUser = state => {
-  return state.tasks.getAllTasks.filter(task =>
-      task.projectName === state.users.setUser.user.projectName.toLowerCase());
+  return state.tasks.getAllTasks.filter(task => {
+      return state.users.setUser.user.projectName === undefined
+        || task.projectName === undefined ?
+          false : task.projectName.toLowerCase() === state.users.setUser.user.projectName.toLowerCase();
+  })
 };
 
 export const getEditableState = (state) => {
