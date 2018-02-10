@@ -7,20 +7,22 @@ import { saveTask, editTaskPropertyValue, deleteTask } from '../actions/tasks';
 import { getOneTask, getEditableState } from '../reducers/tasks'
 
 const TaskDetailsPage = ({task, editable, dispatch, history}) => {
+    const handleDelete = task => {
+        dispatch(deleteTask(task));
+        history.goBack()
+    };
+    const handleSave = task => {
+        dispatch(saveTask(task));
+        history.goBack()
+    };
     return (
         <View style={styles.container}>
             <TaskDetails
                 task = {task}
-                onDelete = {(task) => {
-                    dispatch(deleteTask(task));
-                    history.goBack()
-                }}
+                onDelete = {task => handleDelete(task)}
                 editable = {editable}
                 onEdit = {(value, name) => dispatch(editTaskPropertyValue(value, name))}
-                onSave = {(task) => {
-                    dispatch(saveTask(task));
-                    history.goBack()
-                }}
+                onSave = {task => handleSave(task)}
             />
         </View>
     )
@@ -39,7 +41,7 @@ TaskDetailsPage.propTypes = {
 
 const mapStateToProps = state => ({
     task: getOneTask(state.tasks),
-    editable: getEditableState(state.tasks)
+    editable: getEditableState(state.tasks),
 });
 
 export default connect(mapStateToProps)(TaskDetailsPage);
