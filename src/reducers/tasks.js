@@ -68,7 +68,6 @@ export default combineReducers({
 })
 
 export const getOneTask = (state) => {
-    console.log(`getOneTask: ${JSON.stringify(state.getTask.task === undefined ? initialState.task : state.getTask.task)}`)
     return state.getTask.task === undefined ? initialState.task : state.getTask.task;
 };
 
