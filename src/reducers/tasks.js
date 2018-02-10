@@ -60,7 +60,6 @@ const hasTaskBeenEdited = (state = initialState, action) => {
     }
 };
 
-
 export default combineReducers({
     getAllTasks,
     getTask,

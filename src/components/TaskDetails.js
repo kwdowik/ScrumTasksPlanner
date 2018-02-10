@@ -3,7 +3,7 @@ import { View, StyleSheet, Picker } from 'react-native';
 import { FormInput, FormLabel, Button } from 'react-native-elements';
 import { Dropdown } from 'react-native-material-dropdown';
 
-export const TaskDetails = ({task, editable, onEdit, onSave, onDelete}) => {
+export const TaskDetails = ({task, projects, editable, onEdit, onSave, onDelete}) => {
     return(
         <View>
             <FormLabel>Name</FormLabel>
@@ -12,9 +12,10 @@ export const TaskDetails = ({task, editable, onEdit, onSave, onDelete}) => {
                 value={task.name}
                 onChangeText={e => onEdit(e, 'name')}
             />
-            <FormLabel>Project</FormLabel>
-            <FormInput
-                inputStyle={styles.formInput}
+            <Dropdown
+                label='Project'
+                containerStyle={styles.dropdownStyle}
+                data={dropdownProjectData(projects)}
                 value={task.projectName}
                 onChangeText={e => onEdit(e, 'projectName')}
             />
@@ -32,12 +33,12 @@ export const TaskDetails = ({task, editable, onEdit, onSave, onDelete}) => {
                value={task.state}
                onChangeText={e => onEdit(e, 'state')}
            />
-            <FormLabel>Create date</FormLabel>
-            <FormInput
-                inputStyle={styles.formInput}
-                value={task.createDate}
-                onChangeText={e => onEdit(e, 'createDate')}
-            />
+            {/*<FormLabel>Create date</FormLabel>*/}
+            {/*<FormInput*/}
+                {/*inputStyle={styles.formInput}*/}
+                {/*value={task.createDate}*/}
+                {/*onChangeText={e => onEdit(e, 'createDate')}*/}
+            {/*/>*/}
             <FormLabel>Assigned</FormLabel>
             <FormInput
                 inputStyle={styles.formInput}
@@ -90,6 +91,14 @@ const dropdownStateData = () => {
     ];
 };
 
+const dropdownProjectData = projects => {
+    let dates = projects.map((p,index) => {
+        let data = {};
+        data['value'] = p.projectName;
+        return data
+    });
+    return dates;
+};
 const requiredPropertiesAreFillIn = task => (
         task.name !== undefined &&
         task.projectName !== undefined &&

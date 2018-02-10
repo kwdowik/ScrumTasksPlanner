@@ -6,9 +6,9 @@ import {
 } from 'react-native-elements';
 import { View, Text, ScrollView, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
-import { tryLogin, editUserPropertyValue, clearLoginProperties, setErrorMessage } from "../actions/users"
+import { tryLogin, editUserPropertyValue, clearLoginProperties, setErrorMessage } from '../actions/users'
+import { getAllProjects } from '../actions/projects'
 import { getUser, isError } from '../reducers/users';
-import TasksPage from "../containers/TasksPage";
 
 const SignInPage = ({history, dispatch, user, errorMessage}) => {
     return (
@@ -36,7 +36,10 @@ const SignInPage = ({history, dispatch, user, errorMessage}) => {
                 disabled={!user.username || !user.password}
                 onPress={() => {
                     tryLogin(user,dispatch).then(isLogged => {
-                        if(isLogged) history.push('/tasks');
+                        if(isLogged) {
+                            dispatch(getAllProjects())
+                            history.push('/tasks');
+                        }
                     });
                 }}
                 title="Sign in"

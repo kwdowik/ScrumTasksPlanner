@@ -5,8 +5,9 @@ import { TaskDetails } from '../components/TaskDetails';
 import { connect } from 'react-redux';
 import { saveTask, editTaskPropertyValue, deleteTask } from '../actions/tasks';
 import { getOneTask, getEditableState } from '../reducers/tasks'
+import { getProjects } from "../reducers/projects";
 
-const TaskDetailsPage = ({task, editable, dispatch, history}) => {
+const TaskDetailsPage = ({task, projects, editable, dispatch, history}) => {
     const handleDelete = task => {
         dispatch(deleteTask(task));
         history.goBack()
@@ -21,6 +22,7 @@ const TaskDetailsPage = ({task, editable, dispatch, history}) => {
                 task = {task}
                 onDelete = {task => handleDelete(task)}
                 editable = {editable}
+                projects = {projects}
                 onEdit = {(value, name) => dispatch(editTaskPropertyValue(value, name))}
                 onSave = {task => handleSave(task)}
             />
@@ -42,6 +44,7 @@ TaskDetailsPage.propTypes = {
 const mapStateToProps = state => ({
     task: getOneTask(state.tasks),
     editable: getEditableState(state.tasks),
+    projects: getProjects(state)
 });
 
 export default connect(mapStateToProps)(TaskDetailsPage);
