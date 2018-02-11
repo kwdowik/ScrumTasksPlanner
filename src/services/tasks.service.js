@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { guid } from './utils/guid';
+import qs from 'qs';
 
-const BASE_URL = 'http://localhost:3000/tasks/';
+const BASE_URL = 'http://localhost:8080/v1/tasks/';
 
 const getTasks = () => axios.get(BASE_URL)
     .then(response => {
@@ -11,14 +12,14 @@ const getTasks = () => axios.get(BASE_URL)
         return error
     });
 
-const updateTask = task => axios.patch(`${BASE_URL+task.id}`, {
-    assignedTo: task.assignedTo,
-    createDate: task.createDate,
-    projectName: task.projectName,
-    priority: task.priority,
-    name: task.name,
-    state: task.state
-    })
+const updateTask = task => axios.patch(`${BASE_URL+task.id}`, qs.stringify({
+        assignedTo: task.assignedTo,
+        createDate: task.createDate,
+        projectName: task.projectName,
+        priority: task.priority,
+        name: task.name,
+        state: task.state
+    }))
     .then(response => {
         return response
     })
@@ -26,15 +27,15 @@ const updateTask = task => axios.patch(`${BASE_URL+task.id}`, {
         return error
     });
 
-const createTask = task => axios.post(BASE_URL, {
-    id: guid(),
-    assignedTo: task.assignedTo,
-    projectName: task.projectName,
-    createDate: new Date().toLocaleString(),
-    priority: task.priority,
-    name: task.name,
-    state: task.state
-    })
+const createTask = task => axios.post(BASE_URL, qs.stringify({
+        id: guid(),
+        assignedTo: task.assignedTo,
+        projectName: task.projectName,
+        createDate: new Date().toLocaleString(),
+        priority: task.priority,
+        name: task.name,
+        state: task.state
+    }))
     .then(response => {
         return response
     })

@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { guid } from './utils/guid';
+import qs from 'qs';
 
-const BASE_URL = 'http://localhost:3000/projects/';
+const BASE_URL = 'http://localhost:8080/v1/projects/';
 
 const getProjects = () => axios.get(BASE_URL)
     .then(response => {
@@ -11,11 +12,11 @@ const getProjects = () => axios.get(BASE_URL)
         return error
     });
 
-const createProject = projectName => axios.post(BASE_URL, {
-    id: guid(),
-    projectName: projectName,
-    createDate: new Date().toLocaleString()
-})
+const createProject = projectName => axios.post(BASE_URL, qs.stringify({
+        id: guid(),
+        projectName: projectName,
+        createDate: new Date().toLocaleString()
+    }))
     .then(response => {
         return response
     })

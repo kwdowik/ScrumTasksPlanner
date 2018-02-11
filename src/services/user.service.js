@@ -1,8 +1,9 @@
 import axios from 'axios';
 import bcrypt from 'react-native-bcrypt';
 import { guid } from './utils/guid';
+import qs from 'qs';
 
-const BASE_URL = 'http://localhost:3000/users/';
+const BASE_URL = 'http://localhost:8080/v1/users/';
 
 const getUsers = () => axios.get(BASE_URL)
     .then(response => {
@@ -12,13 +13,13 @@ const getUsers = () => axios.get(BASE_URL)
         return error
     });
 
-const addUser  = user => axios.post(BASE_URL, {
+const addUser  = user => axios.post(BASE_URL, qs.stringify({
         id: guid(),
         username: user.username,
         password: user.password,
         createDate: new Date().toLocaleString(),
         projectName: user.projectName
-    })
+    }))
     .then(response => {
         return response
     })
