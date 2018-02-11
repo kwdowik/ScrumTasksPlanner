@@ -14,7 +14,7 @@ export const taskDetails = task => (
 });
 
 export const saveTask = task => dispatch => {
-    if(task.id === undefined) {
+    if(task._id === undefined) {
         taskService.createTask(task).then(response => {
             dispatch(getAllTasks());
             console.log(`Added task: ${response}`);

@@ -12,7 +12,7 @@ const getTasks = () => axios.get(BASE_URL)
         return error
     });
 
-const updateTask = task => axios.patch(`${BASE_URL+task.id}`, qs.stringify({
+const updateTask = task => axios.patch(`${BASE_URL+task._id}`, qs.stringify({
         assignedTo: task.assignedTo,
         createDate: task.createDate,
         projectName: task.projectName,
@@ -28,7 +28,6 @@ const updateTask = task => axios.patch(`${BASE_URL+task.id}`, qs.stringify({
     });
 
 const createTask = task => axios.post(BASE_URL, qs.stringify({
-        id: guid(),
         assignedTo: task.assignedTo,
         projectName: task.projectName,
         createDate: new Date().toLocaleString(),
@@ -43,7 +42,7 @@ const createTask = task => axios.post(BASE_URL, qs.stringify({
         return error
     });
 
-const removeTask = task => axios.delete(`${BASE_URL+task.id}`)
+const removeTask = task => axios.delete(`${BASE_URL+task._id}`)
     .then(response => response)
     .catch(err => err);
 

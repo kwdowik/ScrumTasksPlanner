@@ -14,7 +14,7 @@ const setTask = (state = initialState, action) => {
             return {
                 ...state,
                 ...action.tasks.reduce((obj, task) => {
-                    obj[task.id] = task;
+                    obj[task._id] = task;
                     return obj;
                 }, {})
             };

@@ -13,7 +13,6 @@ const getProjects = () => axios.get(BASE_URL)
     });
 
 const createProject = projectName => axios.post(BASE_URL, qs.stringify({
-        id: guid(),
         projectName: projectName,
         createDate: new Date().toLocaleString()
     }))

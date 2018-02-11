@@ -11,7 +11,7 @@ const setProject = (state = initialState, action) => {
             return {
                 ...state,
                 ...action.projects.reduce((obj, project) => {
-                    obj[project.id] = project;
+                    obj[project._id] = project;
                     return obj;
                 }, {})
             };

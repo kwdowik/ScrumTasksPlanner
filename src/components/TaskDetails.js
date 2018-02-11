@@ -54,7 +54,7 @@ export const TaskDetails = ({task, projects, editable, onEdit, onSave, onDelete}
                 icon={{name: 'save'}}
                 buttonStyle={styles.addButtonStyle}
                 title='Save' />
-            {task.id !== undefined &&
+            {task._id !== undefined &&
             <Button
                 onPress={() => onDelete(task)}
                 icon={{name: 'delete'}}

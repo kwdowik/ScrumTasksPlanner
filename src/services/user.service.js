@@ -14,7 +14,6 @@ const getUsers = () => axios.get(BASE_URL)
     });
 
 const addUser  = user => axios.post(BASE_URL, qs.stringify({
-        id: guid(),
         username: user.username,
         password: user.password,
         createDate: new Date().toLocaleString(),
