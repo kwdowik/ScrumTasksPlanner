@@ -9,6 +9,7 @@
   "dependencies": {
     "axios": "^0.16.2",
     "prop-types": "^15.5.10",
+    "qs": "^6.5.1",
     "react": "^16.2.0",
     "react-native": "^0.53.0",
     "react-native-bcrypt": "^2.4.0",
