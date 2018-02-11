@@ -5,7 +5,6 @@ export const getAllUsers = (req, res, next) => {
 };
 
 export const createUser = (req, res, next) => {
-    console.log(req.body);
     const user = new User(req.body);
     user.save((err, createdUser) => {
         if (err) {

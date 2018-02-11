@@ -18,7 +18,7 @@ router.route('/tasks')
     .post(createTask);
 
 router.route('/tasks/:taskId')
-    .put(updateTask)
+    .patch(updateTask)
     .delete(deleteTask);
 
 // Handle /users route with index action from movies controller

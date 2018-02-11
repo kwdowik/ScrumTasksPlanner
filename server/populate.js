@@ -5,14 +5,12 @@ import Project from './models/project'
 
 const users = [
     {
-        id: "e325292e-cdb8-e259-83a7-3a02e8560d88",
         username: "Test",
         password: "$2a$10$9195nQWSozCFURl38LMOS.41hBALRY3N33wOplrJFNQP1qYnUrpV2",
         createDate: "01.02.2018, 07:29:02",
         projectName: "project1"
     },
     {
-        id: "2f7085b8-aa35-cc46-dc86-4c8702651e92",
         username: "Test2",
         password: "$2a$10$ADfbxPJE715eAa23nhNIROffHNsR3gYA.lXUhLoVN0z37Yk1z.t4.",
         createDate: "10.02.2018, 11:49:02",
@@ -22,17 +20,14 @@ const users = [
 
 const projects = [
     {
-        id: "08645d65-c86e-cebe-cb1e-0ecb4e3b9f62",
         projectName: "project3",
         createDate: "10.02.2018, 11:49:02"
     },
     {
-        id: "1afacd8f-9704-5132-004d-d3a28f4b4068",
         projectName: "project2",
         createDate: "10.02.2018, 11:49:49"
     },
     {
-        id: "1etacd8f-9704-5132-004d-d3a28f4b4068",
         projectName: "project1",
         createDate: "05.02.2018, 11:49:49"
     }
@@ -47,7 +42,6 @@ const tasks = [
         userImg: "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
         state: "new",
         projectName: "project1",
-        id: "4a3c186b-8fb2-e111-03c2-fc73d306d6ed"
     },
     {
         assignedTo: "Kacper",
@@ -57,7 +51,6 @@ const tasks = [
         userImg: "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
         state: "done",
         projectName: "project2",
-        id: "4d6c186b-9gb2-e111-03c2-fc73d306d6ed"
     },
     {
         assignedTo: "Kacper",
@@ -67,7 +60,6 @@ const tasks = [
         userImg: "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg",
         state: "in progress",
         projectName: "project2",
-        id: "4d6c186b-8fb2-e111-03c2-fc73d306d6ww"
     },
     {
         assignedTo: "Andrew",
@@ -77,7 +69,6 @@ const tasks = [
         userImg: "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
         state: "new",
         projectName: "project2",
-        id: "4d6c186b-9gb2-e111-03c2-fc73d226d6ed"
     },
     {
         assignedTo: "Peter",
@@ -87,7 +78,6 @@ const tasks = [
         userImg: "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg",
         state: "in progress",
         projectName: "project1",
-        id: "4d6c186b-8fb2-e111-03c2-fc33d306d6ww"
     }
 ];
 

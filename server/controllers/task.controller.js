@@ -5,7 +5,6 @@ export const getAllTasks = (req, res, next) => {
 };
 
 export const createTask = (req, res, next) => {
-    console.log(req.body);
     const task = new Task(req.body);
     task.save((err, createdTask) => {
         if (err) {
@@ -20,6 +19,7 @@ export const updateTask = (req, res, next) => {
         if (err) {
             res.status(500).send(err);
         } else {
+            console.log(err);
             task.name = req.body.name || task.name;
             task.projectName = req.body.projectName || task.projectName;
             task.assignedTo = req.body.assignedTo || task.assignedTo;
@@ -43,7 +43,7 @@ export const deleteTask = (req, res, next) => {
     Task.findByIdAndRemove(req.params.taskId, (err, task) => {
         let response = {
             message: 'Task successfully deleted',
-            id: task.id
+            id: task._id
         };
         res.status(200).send(response);
     });

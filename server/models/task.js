@@ -1,10 +1,6 @@
 import mongoose, { Schema } from 'mongoose'
 
 let taskSchema = new Schema({
-    id: {
-        type: String,
-        unique: true
-    },
     name: {
         type: String,
         unique: true
