@@ -4,7 +4,7 @@ import {
     FormLabel,
     Button
 } from 'react-native-elements';
-import { View, Text, ScrollView, StyleSheet } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux';
 import { tryLogin, editUserPropertyValue, clearLoginProperties, setErrorMessage, signingIn } from '../actions/users'
 import { getAllProjects } from '../actions/projects'
@@ -20,7 +20,7 @@ const SignInPage = ({history, dispatch, user, isSigningIn, errorMessage}) => {
             dispatch(signingIn(false));
         });
     };
-    const onSignUpHandle = () => {
+    const onSingUpHandle = () => {
         dispatch(clearLoginProperties());
         dispatch(setErrorMessage(''));
         history.push('/singUp');
@@ -54,12 +54,13 @@ const SignInPage = ({history, dispatch, user, isSigningIn, errorMessage}) => {
             <Button
                 buttonStyle={styles.buttonStyle}
                 disabled={isSigningIn}
-                onPress={() => onSignUpHandle()}
+                onPress={() => onSingUpHandle()}
                 title="Sign up"
             />
             {errorMessage !== '' &&
                 <FormLabel labelStyle={styles.labelStyle}>{errorMessage}</FormLabel>
             }
+            <ActivityIndicator size="large" color="#68c2ee" animating={isSigningIn}/>
         </ScrollView>
     )
 };
