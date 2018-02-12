@@ -32,7 +32,7 @@ const TaskDetailsPage = ({task, projects, editable, dispatch, history}) => {
 
 TaskDetailsPage.propTypes = {
     task: PropTypes.shape({
-        id: PropTypes.string,
+        _id: PropTypes.string,
         assignedTo: PropTypes.string,
         priority: PropTypes.string.isRequired,
         createDate: PropTypes.string,

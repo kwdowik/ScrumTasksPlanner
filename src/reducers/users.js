@@ -1,9 +1,10 @@
 import { combineReducers } from 'redux';
-import {EDIT_USER_PROPERTY, SET_USER, INVALID_USER, USER_REGISTERED} from '../constans/ActionTypes'
+import {EDIT_USER_PROPERTY, SET_USER, INVALID_USER, USER_REGISTERED, SIGNING_IN} from '../constans/ActionTypes'
 
 const initialState = {
     user: {},
     error: '',
+    isSigningIn: false
 };
 
 const setUser = (state = initialState, action) => {
@@ -21,6 +22,10 @@ const setUser = (state = initialState, action) => {
             return { ...state,
                 user: action.user
             };
+        case SIGNING_IN:
+            return { ...state,
+                isSigningIn: action.value
+            };
         default:
             console.log(`reducers: setUser state ${JSON.stringify(state)}`);
             return state
@@ -37,8 +42,7 @@ const setError = (state = initialState, action) => {
         case USER_REGISTERED:
             return { ...state,
 
-            }
-
+            };
         default:
             console.log(`reducers: setError state ${JSON.stringify(state)}`);
             return state;
@@ -53,6 +57,10 @@ export const getUser = state => {
 export const isError = state => {
     console.log(`isUserValid: ${JSON.stringify(state)}`);
     return state.setError.error;
+};
+
+export const isSigningIn = state => {
+    return state.setUser.isSigningIn;
 };
 
 

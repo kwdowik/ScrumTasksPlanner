@@ -7,3 +7,4 @@ export const TASK_DETAILS = 'TASK_DETAILS';
 export const INVALID_USER = 'INVALID_USER';
 export const SET_USER = 'SET_USER';
 export const USER_REGISTERED = 'USER_REGISTERED';
+export const SIGNING_IN = 'SIGNING_IN';

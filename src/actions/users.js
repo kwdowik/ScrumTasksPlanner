@@ -3,6 +3,7 @@ import userService from '../services/user.service';
 import { addNewProject } from "./projects";
 
 export const tryLogin = (user, dispatch) => {
+    dispatch(signingIn(true));
     return userService.isAuthenticate(user.username, user.password)
         .then(isValidUser => {
             if(isValidUser) {
@@ -40,13 +41,19 @@ export const editUserPropertyValue = (value, name) => (
         }
 );
 
+export const signingIn = value => (
+    {
+        type: types.SIGNING_IN,
+        value
+    }
+);
+
 export const setUser = user => (
         {
             type: types.SET_USER,
             user
         }
 );
-
 
 
 export const setErrorMessage = errorMsg => (

@@ -6,11 +6,25 @@ import {
 } from 'react-native-elements';
 import { View, Text, ScrollView, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
-import { tryLogin, editUserPropertyValue, clearLoginProperties, setErrorMessage } from '../actions/users'
+import { tryLogin, editUserPropertyValue, clearLoginProperties, setErrorMessage, signingIn } from '../actions/users'
 import { getAllProjects } from '../actions/projects'
-import { getUser, isError } from '../reducers/users';
+import {getUser, isError, isSigningIn} from '../reducers/users';
 
-const SignInPage = ({history, dispatch, user, errorMessage}) => {
+const SignInPage = ({history, dispatch, user, isSigningIn, errorMessage}) => {
+    const onSingInHandle = () => {
+        tryLogin(user, dispatch).then(isLogged => {
+            if(isLogged) {
+                dispatch(getAllProjects());
+                history.push('/tasks');
+            }
+            dispatch(signingIn(false));
+        });
+    };
+    const onSignUpHandle = () => {
+        dispatch(clearLoginProperties());
+        dispatch(setErrorMessage(''));
+        history.push('/singUp');
+    };
     return (
         <ScrollView style={{padding: 20}}>
             <Text
@@ -33,24 +47,14 @@ const SignInPage = ({history, dispatch, user, errorMessage}) => {
             <View style={{margin:7}} />
             <Button
                 buttonStyle={styles.buttonStyle}
-                disabled={!user.username || !user.password}
-                onPress={() => {
-                    tryLogin(user,dispatch).then(isLogged => {
-                        if(isLogged) {
-                            dispatch(getAllProjects())
-                            history.push('/tasks');
-                        }
-                    });
-                }}
+                disabled={!user.username || !user.password || isSigningIn}
+                onPress={() => onSingInHandle()}
                 title="Sign in"
             />
             <Button
                 buttonStyle={styles.buttonStyle}
-                onPress={() => {
-                    dispatch(clearLoginProperties());
-                    dispatch(setErrorMessage(''));
-                    history.push('/singUp');
-                }}
+                disabled={isSigningIn}
+                onPress={() => onSignUpHandle()}
                 title="Sign up"
             />
             {errorMessage !== '' &&
@@ -62,7 +66,8 @@ const SignInPage = ({history, dispatch, user, errorMessage}) => {
 
 const mapStateToProps = state => ({
     user: getUser(state.users),
-    errorMessage: isError(state.users)
+    errorMessage: isError(state.users),
+    isSigningIn: isSigningIn(state.users)
 });
 
 
