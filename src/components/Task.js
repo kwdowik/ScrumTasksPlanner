@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ListItem, Badge, Icon } from 'react-native-elements';
+import { ListItem, Badge } from 'react-native-elements';
 import { View, Text, StyleSheet } from 'react-native';
 
 
@@ -53,13 +53,5 @@ function getTaskPriorityStyle(priority) {
         case 'high': return styles.highPriority;
         case 'medium': return styles.mediumPriority;
         case 'low': return styles.lowPriority;
-    }
-}
-
-function getStyleForTaskState(state) {
-    switch(state.toLowerCase()){
-        case 'in progress': return <Icon name="build" color='orange'/>;
-        case 'done': return <Icon name="check-circle" color='green'/>;
-        case 'new': return  <Icon name="fiber-new" color="grey"/>;
     }
 }

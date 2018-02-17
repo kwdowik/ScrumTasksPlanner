@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Picker } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { FormInput, FormLabel, Button } from 'react-native-elements';
 import { Dropdown } from 'react-native-material-dropdown';
 
