@@ -1,8 +1,7 @@
 import axios from 'axios';
-import { guid } from './utils/guid';
 import qs from 'qs';
 
-const BASE_URL = 'http://localhost:8080/v1/tasks/';
+const BASE_URL = 'http://localhost:5000/v1/tasks/';
 
 const getTasks = () => axios.get(BASE_URL)
     .then(response => {
@@ -18,7 +17,8 @@ const updateTask = task => axios.patch(`${BASE_URL+task._id}`, qs.stringify({
         projectName: task.projectName,
         priority: task.priority,
         name: task.name,
-        state: task.state
+        state: task.state,
+        userImg: task.userImg
     }))
     .then(response => {
         return response
@@ -33,8 +33,9 @@ const createTask = task => axios.post(BASE_URL, qs.stringify({
         createDate: new Date().toLocaleString(),
         priority: task.priority,
         name: task.name,
-        state: task.state
-    }))
+        state: task.state,
+        userImg: task.userImg
+}))
     .then(response => {
         return response
     })
