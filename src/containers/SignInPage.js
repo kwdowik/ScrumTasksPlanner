@@ -4,7 +4,7 @@ import {
     FormLabel,
     Button
 } from 'react-native-elements';
-import { View, Text, ScrollView, StyleSheet, ActivityIndicator } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, ActivityIndicator, Keyboard } from 'react-native';
 import { connect } from 'react-redux';
 import { tryLogin, editUserPropertyValue, clearLoginProperties, setErrorMessage, signingIn } from '../actions/users'
 import { getAllProjects } from '../actions/projects'
@@ -12,6 +12,7 @@ import {getUser, isError, isSigningIn} from '../reducers/users';
 
 const SignInPage = ({history, dispatch, user, isSigningIn, errorMessage}) => {
     const onSingInHandle = () => {
+        Keyboard.dissmiss;
         tryLogin(user, dispatch).then(isLogged => {
             if(isLogged) {
                 dispatch(getAllProjects());
@@ -21,6 +22,7 @@ const SignInPage = ({history, dispatch, user, isSigningIn, errorMessage}) => {
         });
     };
     const onSingUpHandle = () => {
+        Keyboard.dissmiss;
         dispatch(clearLoginProperties());
         dispatch(setErrorMessage(''));
         history.push('/singUp');
