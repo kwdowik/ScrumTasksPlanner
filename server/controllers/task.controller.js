@@ -1,7 +1,8 @@
 import Task from '../models/task';
 
 export const getAllTasks = (req, res, next) => {
-    Task.find().lean().exec((err, users) => res.json(users))
+    Task.find().lean().exec((err, tasks) => res.json(tasks)
+    )
 };
 
 export const createTask = (req, res, next) => {

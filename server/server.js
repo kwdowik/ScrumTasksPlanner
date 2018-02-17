@@ -6,7 +6,9 @@ import bodyParser from 'body-parser';
 
 
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost/scrumTaskPlannerDb');
+// mongoose.connect('mongodb://admin:admin@ds129428.mlab.com:29428/scrumdb');
+mongoose.connect('mongodb://localhost:27017/ScrumTaskPlanner');
+
 
 // Initialize http server
 const app = express();
@@ -20,7 +22,7 @@ app.use(morgan('combined'));
 app.use('/v1', router);
 
 // Launch the server on port 8080
-const server = app.listen(8080, () => {
+const server = app.listen(process.env.PORT || 5000, () => {
     const { address, port } = server.address();
     console.log(`Listening at http://${address}:${port}`);
 });

@@ -8,13 +8,15 @@ const users = [
         username: "Test",
         password: "$2a$10$9195nQWSozCFURl38LMOS.41hBALRY3N33wOplrJFNQP1qYnUrpV2",
         createDate: "01.02.2018, 07:29:02",
-        projectName: "project1"
+        projectName: "project1",
+        photo: "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg"
     },
     {
         username: "Test2",
         password: "$2a$10$ADfbxPJE715eAa23nhNIROffHNsR3gYA.lXUhLoVN0z37Yk1z.t4.",
         createDate: "10.02.2018, 11:49:02",
-        projectName: "project3"
+        projectName: "project3",
+        photo: "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg"
     },
 ];
 
@@ -81,8 +83,11 @@ const tasks = [
     }
 ];
 
+
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost/scrumTaskPlannerDb');
+// mongoose.connect('mongodb://admin:admin@ds129428.mlab.com:29428/scrumdb');
+mongoose.connect('mongodb://localhost:27017/ScrumTaskPlanner');
+
 
 // Go through each user
 users.map(data => {
