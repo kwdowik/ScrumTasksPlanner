@@ -2,14 +2,18 @@ import React, { Component } from 'react';
 import {
     FormInput,
     FormLabel,
-    Button
+    Button,
 } from 'react-native-elements';
-import { View, Text, ScrollView, StyleSheet } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, Keyboard } from 'react-native';
 import { connect } from 'react-redux';
 import { tryRegisterUser, editUserPropertyValue } from "../actions/users"
 import { getUser, isError } from '../reducers/users';
+import Camera from '../components/Camera';
 
 const SingUpPage = ({history, dispatch, user, errorMessage}) => {
+    const setUserPhoto = (uri) => {
+        dispatch(editUserPropertyValue(uri, 'photo'));
+    };
     return (
         <ScrollView style={{padding: 20}}>
             <Text
@@ -36,10 +40,15 @@ const SingUpPage = ({history, dispatch, user, errorMessage}) => {
                 onChangeText={e => dispatch(editUserPropertyValue(e, 'projectName'))}
             />
             <View style={{margin:7}} />
+            <Camera
+                title={ user.photo === '' ? "Add photo" : "Change photo"}
+                buttonStyle = { user.photo === '' ? {backgroundColor: '#68c2ee'} : {backgroundColor: 'green'}}
+                selectedPhoto={(uri) => setUserPhoto(uri)}/>
             <Button
                 buttonStyle={styles.buttonStyle}
                 disabled={!user.username || !user.password}
                 onPress={() => {
+                    Keyboard.dissmiss;
                     tryRegisterUser(user, dispatch).then(isUserValid => {
                         if(isUserValid) history.goBack();
                     })
@@ -55,7 +64,7 @@ const SingUpPage = ({history, dispatch, user, errorMessage}) => {
 
 const mapStateToProps = state => ({
     user: getUser(state.users),
-    errorMessage: isError(state.users)
+    errorMessage: isError(state.users),
 });
 
 
