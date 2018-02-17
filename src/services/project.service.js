@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { guid } from './utils/guid';
 import qs from 'qs';
 
-const BASE_URL = 'http://localhost:8080/v1/projects/';
+const BASE_URL = 'http://localhost:5000/v1/projects/';
+
 
 const getProjects = () => axios.get(BASE_URL)
     .then(response => {
