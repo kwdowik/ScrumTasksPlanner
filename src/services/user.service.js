@@ -1,9 +1,8 @@
 import axios from 'axios';
 import bcrypt from 'react-native-bcrypt';
-import { guid } from './utils/guid';
 import qs from 'qs';
 
-const BASE_URL = 'http://localhost:8080/v1/users/';
+const BASE_URL = 'http://localhost:5000/v1/users/';
 
 const getUsers = () => axios.get(BASE_URL)
     .then(response => {
@@ -13,11 +12,18 @@ const getUsers = () => axios.get(BASE_URL)
         return error
     });
 
+const getUserByUsername = username => {
+    return isUserAlreadyExist(username)
+        .then(foundedUser => foundedUser)
+        .catch(err => console.error(err));
+};
+
 const addUser  = user => axios.post(BASE_URL, qs.stringify({
         username: user.username,
         password: user.password,
         createDate: new Date().toLocaleString(),
-        projectName: user.projectName
+        projectName: user.projectName,
+        photo: user.photo
     }))
     .then(response => {
         return response
@@ -78,8 +84,7 @@ const hashPassword = (password) => {
 };
 
 const encryptPassword = (password, userpassword) => {
-    return new Promise(
-        function (resolve, reject) {
+    return new Promise((resolve, reject) => {
             bcrypt.compare(password, userpassword, (err, response) => {
                 if(err) reject(err);
                 resolve(response);
@@ -92,5 +97,6 @@ export default {
     registerUser: registerUser,
     isAuthenticate: isAuthenticate,
     getUsers: getUsers,
+    getUserByUsername: getUserByUsername,
     hashPassword: hashPassword
 }
