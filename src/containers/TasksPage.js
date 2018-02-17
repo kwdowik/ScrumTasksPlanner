@@ -34,12 +34,13 @@ TasksPage.propTypes = {
         priority: PropTypes.string.isRequired,
         createDate: PropTypes.string.isRequired,
         name: PropTypes.string.isRequired,
-        state: PropTypes.string.isRequired
+        state: PropTypes.string.isRequired,
+        userImg: PropTypes.string
     })).isRequired
 };
 
 const mapStateToProps = state => ({
-    tasks: getTasksForCurrentUser(state)
+    tasks: getTasksForCurrentUser(state),
 });
 
 export default connect(mapStateToProps)(TasksPage);

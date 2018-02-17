@@ -34,10 +34,10 @@ TaskDetailsPage.propTypes = {
     task: PropTypes.shape({
         _id: PropTypes.string,
         assignedTo: PropTypes.string,
-        priority: PropTypes.string.isRequired,
+        priority: PropTypes.string,
         createDate: PropTypes.string,
-        name: PropTypes.string.isRequired,
-        state: PropTypes.string.isRequired,
+        name: PropTypes.string,
+        state: PropTypes.string,
     }).isRequired
 };
 
