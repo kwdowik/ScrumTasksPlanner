@@ -1,4 +1,5 @@
 import taskService from '../services/tasks.service';
+import userService from '../services/user.service';
 import * as types from '../constans/ActionTypes';
 
 export const getAllTasks = () => dispatch => {
@@ -14,19 +15,25 @@ export const taskDetails = task => (
 });
 
 export const saveTask = task => dispatch => {
-    if(task._id === undefined) {
-        taskService.createTask(task).then(response => {
-            dispatch(getAllTasks());
-            console.log(`Added task: ${response}`);
-            dispatch(addTask(task));
-        }).catch(err => console.log(`Error during saveTask operation ,err: ${err}`))
-    }else {
-        taskService.updateTask(task).then(response => {
-            dispatch(getAllTasks());
-            console.log(`Updated task: ${response}`);
-            dispatch(addTask(task));
-        }).catch(err => console.log(`Error during saveTask operation ,err: ${err}`))
-    }
+    userService.getUserByUsername(task.assignedTo)
+        .then(user => user.photo)
+        .then(userPhoto => {
+            task.userImg = userPhoto;
+            if(task._id === undefined) {
+                taskService.createTask(task).then(response => {
+                    dispatch(getAllTasks());
+                    console.log(`Added task: ${response}`);
+                    dispatch(addTask(task));
+                }).catch(err => console.log(`Error during saveTask operation ,err: ${err}`))
+            }else {
+                taskService.updateTask(task).then(response => {
+                    dispatch(getAllTasks());
+                    console.log(`Updated task: ${response}`);
+                    dispatch(addTask(task));
+                }).catch(err => console.log(`Error during saveTask operation ,err: ${err}`))
+            }
+        })
+
 };
 
 export const addTask = task => (

@@ -6,13 +6,13 @@ export const tryLogin = (user, dispatch) => {
     dispatch(signingIn(true));
     return userService.isAuthenticate(user.username, user.password)
         .then(isValidUser => {
+            dispatch(clearLoginProperties());
             if(isValidUser) {
                 dispatch(setUser(isValidUser));
                 dispatch(setErrorMessage(''));
             }else {
                 dispatch(setErrorMessage('Invalid username or password'))
             }
-            dispatch(clearLoginProperties());
             return isValidUser !== undefined;
         }).catch(err => console.log(`Error during tryLogin operation ,err: ${err}`));
 };
@@ -20,6 +20,8 @@ export const tryLogin = (user, dispatch) => {
 export const clearLoginProperties = () => dispatch => {
     dispatch(editUserPropertyValue('', 'username'));
     dispatch(editUserPropertyValue('', 'password'));
+    dispatch(editUserPropertyValue('', 'projectName'));
+    dispatch(editUserPropertyValue('', 'photo'));
 };
 
 export const tryRegisterUser = (user, dispatch) => {
