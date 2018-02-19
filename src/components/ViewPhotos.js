@@ -58,14 +58,13 @@ const styles = StyleSheet.create({
     },
 
     image: {
-        width: 110,
-        height: 120,
-        marginLeft: 10,
-        marginTop: 10,
+        width: 100,
+        height: 110,
+        margin: 5,
         borderRadius: 5,
         borderWidth: 1,
         borderColor: '#979797'
     }
-})
+});
 
 export default ViewPhotos;
