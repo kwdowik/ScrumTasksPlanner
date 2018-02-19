@@ -6,7 +6,7 @@ export const tryLogin = (user, dispatch) => {
     dispatch(signingIn(true));
     return userService.isAuthenticate(user.username, user.password)
         .then(isValidUser => {
-            dispatch(clearLoginProperties());
+            dispatch(clearAllProperties());
             if(isValidUser) {
                 dispatch(setUser(isValidUser));
                 dispatch(setErrorMessage(''));
@@ -17,7 +17,13 @@ export const tryLogin = (user, dispatch) => {
         }).catch(err => console.log(`Error during tryLogin operation ,err: ${err}`));
 };
 
-export const clearLoginProperties = () => dispatch => {
+export const logoutUser = () => dispatch => {
+    dispatch(setUser({}));
+    dispatch(clearAllProperties());
+};
+
+
+export const clearAllProperties = () => dispatch => {
     dispatch(editUserPropertyValue('', 'username'));
     dispatch(editUserPropertyValue('', 'password'));
     dispatch(editUserPropertyValue('', 'projectName'));
