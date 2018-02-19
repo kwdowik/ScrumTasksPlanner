@@ -4,7 +4,7 @@ import {
     FormLabel,
     Button,
 } from 'react-native-elements';
-import { View, Text, ScrollView, StyleSheet, Keyboard } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, Keyboard, Vibration } from 'react-native';
 import { connect } from 'react-redux';
 import { tryRegisterUser, editUserPropertyValue } from "../actions/users"
 import { getUser, isError } from '../reducers/users';
@@ -13,6 +13,13 @@ import Camera from '../components/Camera';
 const SingUpPage = ({history, dispatch, user, errorMessage}) => {
     const setUserPhoto = (uri) => {
         dispatch(editUserPropertyValue(uri, 'photo'));
+    };
+    const tryToSignUp = () => {
+        Keyboard.dissmiss;
+        tryRegisterUser(user, dispatch).then(isUserValid => {
+            if(isUserValid) history.goBack();
+            else Vibration.vibrate();
+        })
     };
     return (
         <ScrollView style={{padding: 20}}>
@@ -47,12 +54,7 @@ const SingUpPage = ({history, dispatch, user, errorMessage}) => {
             <Button
                 buttonStyle={styles.buttonStyle}
                 disabled={!user.username || !user.password}
-                onPress={() => {
-                    Keyboard.dissmiss;
-                    tryRegisterUser(user, dispatch).then(isUserValid => {
-                        if(isUserValid) history.goBack();
-                    })
-                }}
+                onPress={() => tryToSignUp()}
                 title="Sign Up"
             />
             {errorMessage !== '' &&
