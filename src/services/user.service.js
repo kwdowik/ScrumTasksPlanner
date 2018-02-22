@@ -37,8 +37,12 @@ const registerUser = user => {
         .then(foundedUser => {
             if(foundedUser === undefined) {
                 hashPassword(user.password).then(hashedPassword => {
-                    user.password = hashedPassword;
-                    addUser(user);
+                    addUser({
+                        username: user.username,
+                        password: hashedPassword,
+                        projectName: user.projectName,
+                        photo: user.photo
+                    });
                 })
             }
             return foundedUser;
