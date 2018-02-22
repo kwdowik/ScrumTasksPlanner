@@ -8,3 +8,4 @@ export const INVALID_USER = 'INVALID_USER';
 export const SET_USER = 'SET_USER';
 export const USER_REGISTERED = 'USER_REGISTERED';
 export const SIGNING_IN = 'SIGNING_IN';
+export const SET_TAB_INDEX = 'SET_TAB_INDEX';

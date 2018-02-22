@@ -1,32 +1,35 @@
-import { EDIT_TASK_PROPERTY, RECEIVE_TASKS, TASK_DETAILS, SAVED_EDITED_TASK } from "../constans/ActionTypes";
+import {
+    EDIT_TASK_PROPERTY, RECEIVE_TASKS, TASK_DETAILS, SAVED_EDITED_TASK,
+    SET_TAB_INDEX
+} from "../constans/ActionTypes";
 import { combineReducers } from "redux";
 
 
 const initialState = {
     tasks: [],
     task: {},
-    taskEditable: false
+    taskEditable: false,
+    currTabIndex: 0,
 };
 
-const setTask = (state = initialState, action) => {
+const setTabIndex = (state = initialState, action) => {
     switch (action.type) {
-        case RECEIVE_TASKS:
-            return {
-                ...state,
-                ...action.tasks.reduce((obj, task) => {
-                    obj[task._id] = task;
-                    return obj;
-                }, {})
+        case SET_TAB_INDEX:
+            return { ...state,
+                currTabIndex: action.index
             };
         default:
-            return state.tasks;
+            return state
     }
 };
 
-const getAllTasks = (state = [], action) => {
+const getTasks = (state = [], action) => {
     switch (action.type) {
         case RECEIVE_TASKS:
-            return action.tasks;
+            if(action.filter === 'all')
+                return action.tasks;
+            else
+                return action.tasks.filter(task => task.state === action.filter);
         default:
             return state
     }
@@ -61,9 +64,10 @@ const hasTaskBeenEdited = (state = initialState, action) => {
 };
 
 export default combineReducers({
-    getAllTasks,
+    getTasks,
     getTask,
     hasTaskBeenEdited,
+    setTabIndex,
 })
 
 export const getOneTask = (state) => {
@@ -71,7 +75,7 @@ export const getOneTask = (state) => {
 };
 
 export const getTasksForCurrentUser = state => {
-  return state.tasks.getAllTasks.filter(task => {
+  return state.tasks.getTasks.filter(task => {
       return state.users.setUser.user.projectName === undefined
         || task.projectName === undefined ?
           false : task.projectName.toLowerCase() === state.users.setUser.user.projectName.toLowerCase();
@@ -80,6 +84,10 @@ export const getTasksForCurrentUser = state => {
 
 export const getEditableState = (state) => {
     return state.hasTaskBeenEdited.taskEditable;
+};
+
+export const getTabIndex = state => {
+    return state.tasks.setTabIndex.currTabIndex;
 };
 
 

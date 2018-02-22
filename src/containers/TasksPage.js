@@ -1,21 +1,32 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { ScrollView, StyleSheet } from 'react-native';
-import { Button } from 'react-native-elements'
+import { ScrollView, StyleSheet, View } from 'react-native';
+import { Button, Icon } from 'react-native-elements'
+import BottomNavigation, { Tab } from 'react-native-material-bottom-navigation'
 import { connect } from 'react-redux';
 import { TaskList } from '../components/TaskList';
-import { taskDetails } from '../actions/tasks';
-import { getTasksForCurrentUser } from '../reducers/tasks';
+import { taskDetails, filterTasks, setTabIndex } from '../actions/tasks';
+import { getTasksForCurrentUser, getTabIndex} from '../reducers/tasks';
 
-const TasksPage = ({tasks, dispatch, history}) => {
+const TasksPage = ({tasks, dispatch, history, tabIndex}) => {
+
+    const taskTypeChange = (tabIndex) => {
+        if(tabIndex ===  1) dispatch(filterTasks('done'));
+        else if (tabIndex ===  2) dispatch(filterTasks('in progress'));
+        else dispatch(filterTasks('all'));
+        dispatch(setTabIndex(tabIndex));
+    };
     return (
-        <ScrollView style={styles.container}>
+        <View style={styles.container}>
+            <View style={{flex: 8}}>
+            <ScrollView>
             <TaskList
                 onPress={task => dispatch(taskDetails(task))}
                 tasks={tasks}
                 history={history}
             />
-            <Button
+            </ScrollView>
+                <Button
                 onPress={() => {
                     history.push(`/taskDetails`);
                     dispatch(taskDetails({}))
@@ -23,7 +34,29 @@ const TasksPage = ({tasks, dispatch, history}) => {
                 icon={{name: 'add'}}
                 buttonStyle={styles.buttonStyle}
                 title='Add' />
-        </ScrollView>
+            </View>
+            <View style={{flex: 1}}>
+                <BottomNavigation labelColor="white" rippleColor="white" style={styles.bottomNavigation}
+                                      onTabChange={taskTypeChange} activeTab={tabIndex}
+                    >
+                    <Tab
+                        barBackgroundColor='#68c2ee'
+                        label="All"
+                        icon={<Icon size={24} color="white" name="list" />}
+                    />
+                    <Tab
+                        barBackgroundColor='green'
+                        label="Done"
+                        icon={<Icon size={24} color="white" name="done" />}
+                    />
+                    <Tab
+                        barBackgroundColor='orange'
+                        label="In progress"
+                        icon={<Icon size={24} color="white" name="build" />}
+                    />
+                    </BottomNavigation>
+                </View>
+        </View>
     );
 };
 
@@ -41,6 +74,7 @@ TasksPage.propTypes = {
 
 const mapStateToProps = state => ({
     tasks: getTasksForCurrentUser(state),
+    tabIndex: getTabIndex(state)
 });
 
 export default connect(mapStateToProps)(TasksPage);
@@ -48,11 +82,15 @@ export default connect(mapStateToProps)(TasksPage);
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#F5FCFF',
+        backgroundColor: '#f5fcff',
     },
     buttonStyle: {
-        marginTop: 20,
         backgroundColor: '#68c2ee'
     },
+    bottomNavigation: {
+        elevation: 8,
+        position: 'absolute',
+        left: 0, bottom: 0, right: 0
+    }
 });
 
