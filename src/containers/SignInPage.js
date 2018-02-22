@@ -6,26 +6,26 @@ import {
 } from 'react-native-elements';
 import { View, Text, ScrollView, StyleSheet, ActivityIndicator, Keyboard, Vibration } from 'react-native';
 import { connect } from 'react-redux';
-import { tryLogin, editUserPropertyValue, clearAllProperties, setErrorMessage, signingIn } from '../actions/users'
+import {tryLogin, editUserPropertyValue, setErrorMessage, signingIn} from '../actions/users'
 import { getAllProjects } from '../actions/projects'
 import {getUser, isError, isSigningIn} from '../reducers/users';
 
 const SignInPage = ({history, dispatch, user, isSigningIn, errorMessage}) => {
-
     const onSingInHandle = () => {
         Keyboard.dissmiss;
         tryLogin(user, dispatch).then(isLogged => {
             if(isLogged) {
                 dispatch(getAllProjects());
                 history.push('/tasks');
-            }
+                clearInputs();
+            }else
+                Vibration.vibrate();
             dispatch(signingIn(false));
-            Vibration.vibrate();
         });
     };
     const onSingUpHandle = () => {
         Keyboard.dissmiss;
-        dispatch(clearAllProperties());
+        clearInputs();
         dispatch(setErrorMessage(''));
         history.push('/singUp');
     };
@@ -36,16 +36,18 @@ const SignInPage = ({history, dispatch, user, isSigningIn, errorMessage}) => {
                 Login
             </Text>
             <FormInput
+                ref={input => this.usernameInput = input}
                 placeholder='Username'
                 autoCorrect={false}
-                value={user.username}
+                enabled={!isSigningIn}
                 onChangeText={e => dispatch(editUserPropertyValue(e, 'username'))}
             />
             <FormInput
+                ref={input => this.passwordInput = input}
                 placeholder='Password'
                 autoCorrect={false}
+                enabled={!isSigningIn}
                 secureTextEntry={true}
-                value={user.password}
                 onChangeText={e => dispatch(editUserPropertyValue(e, 'password'))}
             />
             <View style={{margin:7}} />
@@ -67,6 +69,11 @@ const SignInPage = ({history, dispatch, user, isSigningIn, errorMessage}) => {
             <ActivityIndicator size="large" color="#68c2ee" animating={isSigningIn}/>
         </ScrollView>
     )
+};
+
+const clearInputs = () => {
+    if(this.usernameInput) this.usernameInput.clearText();
+    if(this.passwordInput) this.passwordInput.clearText();
 };
 
 const mapStateToProps = state => ({

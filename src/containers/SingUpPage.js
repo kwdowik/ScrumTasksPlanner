@@ -30,26 +30,26 @@ const SingUpPage = ({history, dispatch, user, errorMessage}) => {
             <FormInput
                 placeholder='Username'
                 autoCorrect={false}
-                value={user.username}
+                ref={input => this.usernameInput = input}
                 onChangeText={e => dispatch(editUserPropertyValue(e, 'username'))}
             />
             <FormInput
                 placeholder='Password'
                 autoCorrect={false}
                 secureTextEntry={true}
-                value={user.password}
+                ref={input => this.passwordInput = input}
                 onChangeText={e => dispatch(editUserPropertyValue(e, 'password'))}
             />
             <FormInput
                 placeholder='Project name'
                 autoCorrect={false}
-                value={user.projectName}
+                ref={input => this.projectInput = input}
                 onChangeText={e => dispatch(editUserPropertyValue(e, 'projectName'))}
             />
             <View style={{margin:7}} />
             <Camera
-                title={ user.photo === '' ? "Add photo" : "Change photo"}
-                buttonStyle = { user.photo === '' ? {backgroundColor: '#68c2ee'} : {backgroundColor: 'green'}}
+                title={ !user.photo ? "Add photo" : "Change photo"}
+                buttonStyle = { !user.photo ? {backgroundColor: '#68c2ee'} : {backgroundColor: 'green'}}
                 selectedPhoto={(uri) => setUserPhoto(uri)}/>
             <Button
                 buttonStyle={styles.buttonStyle}
@@ -68,7 +68,6 @@ const mapStateToProps = state => ({
     user: getUser(state.users),
     errorMessage: isError(state.users),
 });
-
 
 const styles = StyleSheet.create({
     buttonStyle: {
