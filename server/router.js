@@ -1,6 +1,7 @@
 import express, { Router } from 'express';
 // Import actions from controllers
-import { getAllUsers, createUser } from './controllers/user.controller';
+import {getAllUsers, createUser} from './controllers/user.controller';
+import {login} from './controllers/auth.controller';
 import {getAllTasks, createTask, updateTask, deleteTask} from "./controllers/task.controller";
 import {getAllProjects, createProject} from "./controllers/project.controller";
 
@@ -11,6 +12,9 @@ const router = Router();
 router.route('/users')
     .get(getAllUsers)
     .post(createUser);
+
+router.route('/auth/login')
+    .post(login);
 
 // Handle /users route with index action from movies controller
 router.route('/tasks')

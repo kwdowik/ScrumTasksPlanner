@@ -1,4 +1,5 @@
 {
   "name": "ScrumTasksPlanner",
-  "displayName": "ScrumTasksPlanner"
+  "displayName": "ScrumTasksPlanner",
+  "environment": "production"
 }
