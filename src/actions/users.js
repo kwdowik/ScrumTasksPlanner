@@ -31,7 +31,6 @@ export const clearAllProperties = () => dispatch => {
 };
 
 export const tryRegisterUser = (user, dispatch) => {
-    addNewProject(user.projectName);
     return userService.registerUser(user)
         .then(isUserExist => {
             isUserExist ? dispatch(setErrorMessage('User already exists')) :

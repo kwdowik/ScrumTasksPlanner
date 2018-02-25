@@ -1,8 +1,10 @@
 import axios from 'axios';
 import qs from 'qs';
+import appConfig from '../../app.json';
 
-const BASE_URL = 'http://localhost:5000/v1/projects/';
-
+const BASE_URL = appConfig['environment'] === 'production'
+    ? 'https://scrum-tasks-planner-server.herokuapp.com/v1/projects/'
+    : 'http://localhost:5000/v1/projects/';
 
 const getProjects = () => axios.get(BASE_URL)
     .then(response => {

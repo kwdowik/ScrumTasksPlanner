@@ -1,11 +1,6 @@
 import projectService from '../services/project.service';
 import * as types from '../constans/ActionTypes';
 
-
-export const addNewProject = projectName => {
-    projectService.addProject(projectName)
-};
-
 export const getAllProjects = () => dispatch => {
     projectService.getProjects().then(projects => {
         dispatch(receiveProjects(projects));
