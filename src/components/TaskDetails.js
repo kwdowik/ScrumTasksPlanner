@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { FormInput, FormLabel, Button } from 'react-native-elements';
 import { Dropdown } from 'react-native-material-dropdown';
+import {sortByProperty} from '../services/utils/util';
 
 export const TaskDetails = ({task, projects, editable, onEdit, onSave, onDelete}) => {
     return(
         <View>
             <FormLabel>Name</FormLabel>
             <FormInput
+                autoCorrect={false}
                 inputStyle={styles.formInput}
                 value={task.name}
                 onChangeText={e => onEdit(e, 'name')}
@@ -43,6 +45,7 @@ export const TaskDetails = ({task, projects, editable, onEdit, onSave, onDelete}
             }
             <FormLabel>Assigned</FormLabel>
             <FormInput
+                autoCorrect={false}
                 inputStyle={styles.formInput}
                 value={task.assignedTo}
                 onChangeText={e => onEdit(e, 'assignedTo')}
@@ -94,7 +97,9 @@ const dropdownStateData = () => {
 };
 
 const dropdownProjectData = projects => {
-    let dates = projects.map((p,index) => {
+    let dates = projects
+        .sort(sortByProperty('projectName'))
+        .map(p => {
         let data = {};
         data['value'] = p.projectName;
         return data

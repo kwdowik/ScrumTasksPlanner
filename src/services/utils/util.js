@@ -7,3 +7,15 @@ export const guid = () => {
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
         s4() + '-' + s4() + s4() + s4();
 };
+
+export const sortByProperty = property => {
+    function compare(a, b) {
+        if (a[property] < b[property])
+        return -1;
+        if (a[property] > b[property])
+        return 1;
+
+        return 0
+    }
+    return compare;
+};
