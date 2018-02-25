@@ -3,11 +3,14 @@ import morgan from 'morgan';
 import mongoose from 'mongoose';
 import router from './router';
 import bodyParser from 'body-parser';
+import config from './config.json';
 
+const MONGODB_CONN = config['environment'] === 'production'
+    ? `mongodb://${config[`mongo_user`]}:${config[`mongo_password`]}@ds129428.mlab.com:29428/scrumdb`
+    : 'mongodb://localhost:27017/ScrumTaskPlanner';
 
 // Connect to MongoDB
-// mongoose.connect('mongodb://admin:admin@ds129428.mlab.com:29428/scrumdb');
-mongoose.connect('mongodb://localhost:27017/ScrumTaskPlanner');
+mongoose.connect(MONGODB_CONN);
 
 
 // Initialize http server

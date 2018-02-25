@@ -1,0 +1,5 @@
+{
+  "environment": "production",
+  "mongo_user": "",
+  "mongo_password": ""
+}
