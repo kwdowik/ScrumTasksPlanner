@@ -1,16 +1,24 @@
 import axios from 'axios';
-import bcrypt from 'react-native-bcrypt';
 import qs from 'qs';
+import appConfig from '../../app.json';
+import {addProject} from './project.service';
 
-const BASE_URL = 'http://localhost:5000/v1/users/';
+const BASE_URL = appConfig['environment'] === 'production'
+    ? 'https://scrum-tasks-planner-server.herokuapp.com/v1/users/'
+    : 'http://localhost:5000/v1/users/';
+const BASE_AUTH_URL = appConfig['environment'] === 'production'
+    ? 'https://scrum-tasks-planner-server.herokuapp.com/v1/auth/login'
+    : 'http://localhost:5000/v1/auth/login';
+
 
 const getUsers = () => axios.get(BASE_URL)
-    .then(response => {
-        return response.data
-    })
-    .catch(error => {
-        return error
-    });
+        .then(response => {
+            return response.data
+        })
+        .catch(error => {
+            return error
+        });
+
 
 const getUserByUsername = username => {
     return isUserAlreadyExist(username)
@@ -36,14 +44,14 @@ const registerUser = user => {
     return isUserAlreadyExist(user.username)
         .then(foundedUser => {
             if(foundedUser === undefined) {
-                hashPassword(user.password).then(hashedPassword => {
-                    addUser({
-                        username: user.username,
-                        password: hashedPassword,
-                        projectName: user.projectName,
-                        photo: user.photo
-                    });
-                })
+                if(user.projectName)
+                    addProject(user.projectName);
+                addUser({
+                    username: user.username,
+                    password: user.password,
+                    projectName: user.projectName,
+                    photo: user.photo
+                });
             }
             return foundedUser;
         }).catch(err => {
@@ -60,47 +68,21 @@ const isUserAlreadyExist = username => {
     });
 };
 
-const isAuthenticate = (username, password) => {
-    return isUserAlreadyExist(username)
-        .then(foundedUser => {
-            if(foundedUser) {
-                return encryptPassword(password, foundedUser.password).then(validPassword => {
-                    if(validPassword) return foundedUser;
-                })
-            }
-            }
-        ).catch(err => {
-        return err
-    });
-};
-
-const hashPassword = (password) => {
-    return new Promise(
-        function (resolve, reject) {
-            bcrypt.genSalt(10, (err, salt) => {
-                    bcrypt.hash(password, salt, function (err, hash) {
-                        if(err) reject(err);
-                        resolve(hash.toString());
-                    });
-                }
-            );
-        });
-};
-
-const encryptPassword = (password, userpassword) => {
-    return new Promise((resolve, reject) => {
-            bcrypt.compare(password, userpassword, (err, response) => {
-                if(err) reject(err);
-                resolve(response);
-            })
-        }
-    )
-};
+const isAuthenticate = (username, password) => axios.post(BASE_AUTH_URL, qs.stringify({
+    username: username,
+    password: password
+})).then(response => {
+    if(response.status === 200)
+        return response.data.user;
+    return undefined;
+}).catch(err => {
+    console.log(`Error during isAuthenticate method, err: ${err}`);
+    return undefined;
+});
 
 export default {
     registerUser: registerUser,
     isAuthenticate: isAuthenticate,
     getUsers: getUsers,
-    getUserByUsername: getUserByUsername,
-    hashPassword: hashPassword
+    getUserByUsername: getUserByUsername
 }
