@@ -7,7 +7,7 @@ export const getAllProjects = () => dispatch => {
     })
 };
 
-const receiveProjects = projects => (
+export const receiveProjects = projects => (
     {
         type: types.RECEIVE_PROJECTS,
         projects

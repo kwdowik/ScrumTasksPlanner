@@ -55,23 +55,25 @@ export const taskDetails = task => (
     {
         type: types.TASK_DETAILS,
         task
-    });
+    }
+);
 
 export const addTask = task => (
     {
-    type: types.SAVED_EDITED_TASK,
+        type: types.SAVED_EDITED_TASK,
         task
-});
-
-export const editTaskPropertyValue = (value, name) => (
-        {
-            type: types.EDIT_TASK_PROPERTY,
-            name,
-            value
-        }
+    }
 );
 
-const receiveTasks = (tasks, filter) => (
+export const editTaskPropertyValue = (value, name) => (
+    {
+        type: types.EDIT_TASK_PROPERTY,
+        name,
+        value
+    }
+);
+
+export const receiveTasks = (tasks, filter) => (
     {
         type: types.RECEIVE_TASKS,
         tasks,

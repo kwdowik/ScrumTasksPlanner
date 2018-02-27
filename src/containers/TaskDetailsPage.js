@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { View, StyleSheet } from 'react-native';
 import { TaskDetails } from '../components/TaskDetails';
 import { connect } from 'react-redux';
-import { saveTask, editTaskPropertyValue, deleteTask } from '../actions/tasks';
+import { saveTask, editTaskPropertyValue, deleteTask } from '../actions/tasks.action';
 import { getOneTask, getEditableState } from '../reducers/tasks'
 import { getProjects } from "../reducers/projects";
 

@@ -1,6 +1,6 @@
 import * as types from '../constans/ActionTypes';
 import userService from '../services/user.service';
-import { addNewProject } from "./projects";
+import { addNewProject } from "./projects.action";
 
 export const tryLogin = (user, dispatch) => {
     dispatch(signingIn(true));
@@ -15,11 +15,6 @@ export const tryLogin = (user, dispatch) => {
             }
             return isValidUser !== undefined;
         }).catch(err => console.log(`Error during tryLogin operation ,err: ${err}`));
-};
-
-export const logoutUser = () => dispatch => {
-    dispatch(setUser({}));
-    dispatch(clearAllProperties());
 };
 
 

@@ -25,7 +25,7 @@ const createProject = projectName => axios.post(BASE_URL, qs.stringify({
         return error
     });
 
-const addProject = projectName => {
+export const addProject = projectName => {
     isProjectAlreadyExist(projectName)
         .then(foundedProject => {
             if(foundedProject === undefined) createProject(projectName)

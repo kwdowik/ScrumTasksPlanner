@@ -5,7 +5,7 @@ import { Button, Icon } from 'react-native-elements'
 import BottomNavigation, { Tab } from 'react-native-material-bottom-navigation'
 import { connect } from 'react-redux';
 import { TaskList } from '../components/TaskList';
-import { taskDetails, filterTasks, setTabIndex } from '../actions/tasks';
+import { taskDetails, filterTasks, setTabIndex } from '../actions/tasks.action';
 import { getTasksForCurrentUser, getTabIndex} from '../reducers/tasks';
 
 const TasksPage = ({tasks, dispatch, history, tabIndex}) => {

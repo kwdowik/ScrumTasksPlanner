@@ -6,7 +6,7 @@ import {
 } from 'react-native-elements';
 import { View, Text, ScrollView, StyleSheet, Keyboard, Vibration } from 'react-native';
 import { connect } from 'react-redux';
-import { tryRegisterUser, editUserPropertyValue } from "../actions/users"
+import { tryRegisterUser, editUserPropertyValue } from "../actions/users.action"
 import { getUser, isError } from '../reducers/users';
 import Camera from '../components/Camera';
 
