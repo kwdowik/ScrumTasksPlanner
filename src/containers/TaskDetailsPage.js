@@ -5,7 +5,7 @@ import { TaskDetails } from '../components/TaskDetails';
 import { connect } from 'react-redux';
 import { saveTask, editTaskPropertyValue, deleteTask } from '../actions/tasks.action';
 import { getOneTask, getEditableState } from '../reducers/tasks'
-import { getProjects } from "../reducers/projects";
+import { getProjects } from "../reducers/projects.reducers";
 
 const TaskDetailsPage = ({task, projects, editable, dispatch, history}) => {
     const handleDelete = task => {
