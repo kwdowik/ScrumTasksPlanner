@@ -1,6 +1,5 @@
-import * as actions from '../src/actions/tasks.action';
+import * as actions from '../src/actions/tasks.actions';
 import * as types from '../src/constans/ActionTypes';
-
 
 const task = {
     name: 'test_name',

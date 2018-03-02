@@ -1,9 +1,8 @@
 import {
     EDIT_TASK_PROPERTY, RECEIVE_TASKS, TASK_DETAILS, SAVED_EDITED_TASK,
-    SET_TAB_INDEX
+    SET_TAB_INDEX, SHOW_ALL
 } from "../constans/ActionTypes";
 import { combineReducers } from "redux";
-
 
 const initialState = {
     tasks: [],
@@ -23,19 +22,25 @@ const setTabIndex = (state = initialState, action) => {
     }
 };
 
-const getTasks = (state = [], action) => {
+const setTasks = (state = initialState, action) => {
     switch (action.type) {
         case RECEIVE_TASKS:
-            if(action.filter === 'all')
-                return action.tasks;
+            if(action.filter === SHOW_ALL)
+                return {
+                    ...state,
+                   tasks: action.tasks
+                };
             else
-                return action.tasks.filter(task => task.state === action.filter);
+                return {
+                    ...state,
+                    tasks: action.tasks.filter(task => task.state === action.filter)
+                };
         default:
             return state
     }
 };
 
-const getTask = (state = [], action) => {
+const setTask = (state = initialState, action) => {
     switch (action.type) {
         case TASK_DETAILS:
             return { ...state, task: action.task };
@@ -64,18 +69,18 @@ const hasTaskBeenEdited = (state = initialState, action) => {
 };
 
 export default combineReducers({
-    getTasks,
-    getTask,
+    setTasks,
+    setTask,
     hasTaskBeenEdited,
     setTabIndex,
 })
 
 export const getOneTask = (state) => {
-    return state.getTask.task === undefined ? initialState.task : state.getTask.task;
+    return state.setTask.task === undefined ? initialState.task : state.setTask.task;
 };
 
 export const getTasksForCurrentUser = state => {
-  return state.tasks.getTasks.filter(task => {
+  return state.tasks.setTasks.filter(task => {
       return state.users.setUser.user.projectName === undefined
         || task.projectName === undefined ?
           false : task.projectName.toLowerCase() === state.users.setUser.user.projectName.toLowerCase();

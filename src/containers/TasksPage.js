@@ -5,15 +5,16 @@ import { Button, Icon } from 'react-native-elements'
 import BottomNavigation, { Tab } from 'react-native-material-bottom-navigation'
 import { connect } from 'react-redux';
 import { TaskList } from '../components/TaskList';
-import { taskDetails, filterTasks, setTabIndex } from '../actions/tasks.action';
-import { getTasksForCurrentUser, getTabIndex} from '../reducers/tasks';
+import { taskDetails, filterTasks, setTabIndex } from '../actions/tasks.actions';
+import { getTasksForCurrentUser, getTabIndex} from '../reducers/tasks.reducers';
+import * as types from '../constans/ActionTypes';
 
 const TasksPage = ({tasks, dispatch, history, tabIndex}) => {
 
     const taskTypeChange = (tabIndex) => {
-        if(tabIndex ===  1) dispatch(filterTasks('done'));
-        else if (tabIndex ===  2) dispatch(filterTasks('in progress'));
-        else dispatch(filterTasks('all'));
+        if(tabIndex ===  1) dispatch(filterTasks(types.SHOW_DONE));
+        else if (tabIndex ===  2) dispatch(filterTasks(types.SHOW_IN_PROGRESS));
+        else dispatch(filterTasks());
         dispatch(setTabIndex(tabIndex));
     };
     return (

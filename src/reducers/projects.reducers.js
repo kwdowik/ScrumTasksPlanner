@@ -5,7 +5,7 @@ const initialState = {
     projects: []
 };
 
-const getAllProjects = (state = initialState, action) => {
+const setProjects = (state = initialState, action) => {
     switch (action.type) {
         case RECEIVE_PROJECTS:
             return {
@@ -18,9 +18,9 @@ const getAllProjects = (state = initialState, action) => {
 };
 
 export default combineReducers({
-    getAllProjects,
+    setProjects,
 })
 
 export const getProjects = state => {
-    return state.projects.getAllProjects === undefined ? initialState.projects : state.projects.getAllProjects
+    return state.projects.setProjects === undefined ? initialState.projects : state.projects.setProjects
 };

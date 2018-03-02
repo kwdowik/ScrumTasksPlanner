@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { List } from 'react-native-elements';
 import { View } from 'react-native';
-import { Task } from "./Task";
-import Link from "react-router-native/Link";
+import { Task } from './Task';
+import Link from 'react-router-native/Link';
+import * as types from '../constans/ActionTypes';
 
 export const TaskList = ({tasks, onPress, history}) => (
     <View>
@@ -13,7 +14,7 @@ export const TaskList = ({tasks, onPress, history}) => (
                           onPress={() => onPress(task)}
                           to={`/taskDetails`}>
                         <Task
-                            taskDone={task.state === 'done'}
+                            taskDone={task.state === types.SHOW_DONE}
                             task = { task }
                         />
                     </Link>

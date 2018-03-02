@@ -3,8 +3,9 @@ import userService from '../services/user.service';
 import * as types from '../constans/ActionTypes';
 
 export const getAllTasks = () => dispatch => {
-    taskService.getTasks().then(tasks => {
-        dispatch(receiveTasks(tasks, 'all'));
+    taskService.getTasks()
+        .then(tasks => {
+            dispatch(receiveTasks(tasks, types.SHOW_ALL));
     })
 };
 
@@ -15,32 +16,40 @@ export const saveTask = task => dispatch => {
         .then(userPhoto => {
             task.userImg = userPhoto;
             if(task._id === undefined) {
-                taskService.createTask(task).then(response => {
-                    dispatch(getAllTasks());
-                    console.log(`Added task: ${response}`);
-                    dispatch(addTask(task));
-                }).catch(err => console.log(`Error during saveTask operation ,err: ${err}`))
-            }else {
-                taskService.updateTask(task).then(response => {
-                    dispatch(getAllTasks());
-                    console.log(`Updated task: ${response}`);
-                    dispatch(addTask(task));
-                }).catch(err => console.log(`Error during saveTask operation ,err: ${err}`))
+                taskService.createTask(task)
+                    .then(response => {
+                        dispatch(getAllTasks());
+                        console.log(`Added task: ${response}`);
+                        dispatch(addTask(task));
+                })
+                    .catch(err => console.log(`Error during saveTask operation ,err: ${err}`))
+            }
+            else {
+                taskService.updateTask(task)
+                    .then(response => {
+                        dispatch(getAllTasks());
+                        console.log(`Updated task: ${response}`);
+                        dispatch(addTask(task));
+                })
+                    .catch(err => console.log(`Error during saveTask operation ,err: ${err}`))
             }
         })
 
 };
 
 export const deleteTask = task => dispatch => {
-    taskService.removeTask(task).then(response => {
-        dispatch(getAllTasks());
-        console.log(`Removed task: ${response}`);
-    }).catch(err => console.log(`Error during deleteTask operation ,err: ${err}`))
+    taskService.removeTask(task)
+        .then(response => {
+            dispatch(getAllTasks());
+            console.log(`Removed task: ${response}`);
+    })
+        .catch(err => console.log(`Error during deleteTask operation ,err: ${err}`))
 };
 
 export const filterTasks = filter => dispatch => {
-    taskService.getTasks().then(tasks => {
-        dispatch(receiveTasks(tasks, filter));
+    taskService.getTasks()
+        .then(tasks => {
+            dispatch(receiveTasks(tasks, filter));
     })
 };
 

@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux'
-import tasks from '../reducers/tasks'
-import users from '../reducers/users'
+import tasks from './tasks.reducers'
+import users from './users.reducers'
 import projects from './projects.reducers'
 
 

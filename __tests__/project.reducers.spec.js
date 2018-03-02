@@ -7,7 +7,7 @@ const state = {
 
 describe('projects reducer', () => {
     it('should return the initial sate - getAllProjects', () => {
-        expect(reducer(undefined, {}).getAllProjects).toEqual(
+        expect(reducer(undefined, {}).setProjects).toEqual(
             state
         );
     });
@@ -20,7 +20,7 @@ describe('projects reducer', () => {
         expect(reducer(undefined, {
             type: types.RECEIVE_PROJECTS,
             projects: state.projects
-        }).getAllProjects).toEqual(
+        }).setProjects).toEqual(
             state
         );
     });

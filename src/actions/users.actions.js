@@ -1,6 +1,6 @@
 import * as types from '../constans/ActionTypes';
 import userService from '../services/user.service';
-import { addNewProject } from "./projects.action";
+import { addNewProject } from "./projects.actions";
 
 export const tryLogin = (user, dispatch) => {
     dispatch(signingIn(true));
@@ -10,13 +10,14 @@ export const tryLogin = (user, dispatch) => {
             if(isValidUser) {
                 dispatch(setUser(isValidUser));
                 dispatch(setErrorMessage(''));
-            }else {
+            }
+            else {
                 dispatch(setErrorMessage('Invalid username or password'))
             }
             return isValidUser !== undefined;
-        }).catch(err => console.log(`Error during tryLogin operation ,err: ${err}`));
+        })
+        .catch(err => console.log(`Error during tryLogin operation ,err: ${err}`));
 };
-
 
 export const clearAllProperties = () => dispatch => {
     dispatch(editUserPropertyValue('', 'username'));
@@ -25,22 +26,22 @@ export const clearAllProperties = () => dispatch => {
     dispatch(editUserPropertyValue('', 'photo'));
 };
 
-export const tryRegisterUser = (user, dispatch) => {
+export const tryRegister = (user, dispatch) => {
     return userService.registerUser(user)
         .then(isUserExist => {
-            isUserExist ? dispatch(setErrorMessage('User already exists')) :
-            dispatch(setErrorMessage(''));
+            isUserExist ? dispatch(setErrorMessage('User already exists'))
+                : dispatch(setErrorMessage(''));
             return !isUserExist;
         })
-        .catch(err => console.log(`Error during tryRegisterUser operation ,err: ${err}`));
+        .catch(err => console.log(`Error during tryRegister operation ,err: ${err}`));
 };
 
 export const editUserPropertyValue = (value, name) => (
-        {
-            type: types.EDIT_USER_PROPERTY,
-            name,
-            value
-        }
+    {
+        type: types.EDIT_USER_PROPERTY,
+        name,
+        value
+    }
 );
 
 export const signingIn = value => (
@@ -51,18 +52,17 @@ export const signingIn = value => (
 );
 
 export const setUser = user => (
-        {
-            type: types.SET_USER,
-            user
-        }
+    {
+        type: types.SET_USER,
+        user
+    }
 );
 
-
 export const setErrorMessage = errorMsg => (
-        {
-            type: types.INVALID_USER,
-            errorMsg
-        }
+    {
+        type: types.INVALID_USER,
+        errorMsg
+    }
 );
 
 

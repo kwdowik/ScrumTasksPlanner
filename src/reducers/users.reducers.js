@@ -39,15 +39,16 @@ const setError = (state = initialState, action) => {
             return { ...state,
                 error: action.errorMsg
             };
-        case USER_REGISTERED:
-            return { ...state,
-
-            };
         default:
             console.log(`reducers: setError state ${JSON.stringify(state)}`);
             return state;
     }
 };
+
+export default combineReducers({
+    setUser,
+    setError
+})
 
 export const getUser = state => {
     console.log(`getUser: ${JSON.stringify(state.setUser.user)}`);
@@ -64,9 +65,5 @@ export const isSigningIn = state => {
 };
 
 
-export default combineReducers({
-    setUser,
-    setError
-})
 
 

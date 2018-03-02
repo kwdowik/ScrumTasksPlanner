@@ -6,8 +6,8 @@ import {
 } from 'react-native-elements';
 import { View, Text, ScrollView, StyleSheet, Keyboard, Vibration } from 'react-native';
 import { connect } from 'react-redux';
-import { tryRegisterUser, editUserPropertyValue } from "../actions/users.action"
-import { getUser, isError } from '../reducers/users';
+import { tryRegister, editUserPropertyValue } from "../actions/users.actions"
+import { getUser, isError } from '../reducers/users.reducers';
 import Camera from '../components/Camera';
 
 const SingUpPage = ({history, dispatch, user, errorMessage}) => {
@@ -16,7 +16,7 @@ const SingUpPage = ({history, dispatch, user, errorMessage}) => {
     };
     const tryToSignUp = () => {
         Keyboard.dissmiss;
-        tryRegisterUser(user, dispatch).then(isUserValid => {
+        tryRegister(user, dispatch).then(isUserValid => {
             if(isUserValid) history.goBack();
             else Vibration.vibrate();
         })
