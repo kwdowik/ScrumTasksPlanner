@@ -25,16 +25,18 @@ const setTabIndex = (state = initialState, action) => {
 const setTasks = (state = initialState, action) => {
     switch (action.type) {
         case RECEIVE_TASKS:
-            if(action.filter === SHOW_ALL)
+            if(action.filter === SHOW_ALL) {
                 return {
                     ...state,
-                   tasks: action.tasks
+                    tasks: action.tasks
                 };
-            else
+            }
+            else {
                 return {
                     ...state,
                     tasks: action.tasks.filter(task => task.state === action.filter)
                 };
+            }
         default:
             return state
     }
@@ -80,7 +82,7 @@ export const getOneTask = (state) => {
 };
 
 export const getTasksForCurrentUser = state => {
-  return state.tasks.setTasks.filter(task => {
+    return state.tasks.setTasks.tasks.filter(task => {
       return state.users.setUser.user.projectName === undefined
         || task.projectName === undefined ?
           false : task.projectName.toLowerCase() === state.users.setUser.user.projectName.toLowerCase();

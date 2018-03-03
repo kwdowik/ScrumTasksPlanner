@@ -8,7 +8,7 @@ import { View, Text, ScrollView, StyleSheet, ActivityIndicator, Keyboard, Vibrat
 import { connect } from 'react-redux';
 import {tryLogin, editUserPropertyValue, setErrorMessage, signingIn} from '../actions/users.actions'
 import { getAllProjects } from '../actions/projects.actions'
-import {getUser, isError, isSigningIn} from '../reducers/users.reducers';
+import {getUser, getError, getSigningIn} from '../reducers/users.reducers';
 
 const SignInPage = ({history, dispatch, user, isSigningIn, errorMessage}) => {
     const onSingInHandle = () => {
@@ -78,8 +78,8 @@ const clearInputs = () => {
 
 const mapStateToProps = state => ({
     user: getUser(state.users),
-    errorMessage: isError(state.users),
-    isSigningIn: isSigningIn(state.users)
+    errorMessage: getError(state.users),
+    isSigningIn: getSigningIn(state.users)
 });
 
 

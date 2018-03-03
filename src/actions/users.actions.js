@@ -1,22 +1,21 @@
 import * as types from '../constans/ActionTypes';
 import userService from '../services/user.service';
-import { addNewProject } from "./projects.actions";
 
 export const tryLogin = (user, dispatch) => {
     dispatch(signingIn(true));
     return userService.isAuthenticate(user.username, user.password)
         .then(isValidUser => {
-            dispatch(clearAllProperties());
-            if(isValidUser) {
-                dispatch(setUser(isValidUser));
-                dispatch(setErrorMessage(''));
+                dispatch(clearAllProperties());
+                if(isValidUser) {
+                    dispatch(setUser(isValidUser));
+                    dispatch(setErrorMessage(''));
+                }
+                else {
+                    dispatch(setErrorMessage('Invalid username or password'))
+                }
+                return isValidUser !== undefined;
             }
-            else {
-                dispatch(setErrorMessage('Invalid username or password'))
-            }
-            return isValidUser !== undefined;
-        })
-        .catch(err => console.log(`Error during tryLogin operation ,err: ${err}`));
+        ).catch(err => console.log(`Error during tryLogin operation ,err: ${err}`));
 };
 
 export const clearAllProperties = () => dispatch => {
@@ -29,11 +28,11 @@ export const clearAllProperties = () => dispatch => {
 export const tryRegister = (user, dispatch) => {
     return userService.registerUser(user)
         .then(isUserExist => {
-            isUserExist ? dispatch(setErrorMessage('User already exists'))
-                : dispatch(setErrorMessage(''));
-            return !isUserExist;
-        })
-        .catch(err => console.log(`Error during tryRegister operation ,err: ${err}`));
+                isUserExist ? dispatch(setErrorMessage('User already exists'))
+                    : dispatch(setErrorMessage(''));
+                return !isUserExist;
+            }
+        ).catch(err => console.log(`Error during tryRegister operation ,err: ${err}`));
 };
 
 export const editUserPropertyValue = (value, name) => (

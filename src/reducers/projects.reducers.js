@@ -22,5 +22,5 @@ export default combineReducers({
 })
 
 export const getProjects = state => {
-    return state.projects.setProjects === undefined ? initialState.projects : state.projects.setProjects
+    return state.setProjects.projects === undefined ? initialState.projects : state.setProjects.projects
 };

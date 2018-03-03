@@ -9,32 +9,38 @@ export const getAllTasks = () => dispatch => {
     })
 };
 
+const createNewTask = (task, dispatch) => {
+    taskService.createTask(task)
+        .then(response => {
+                dispatch(getAllTasks());
+                console.log(`Added task: ${JSON.stringify(response)}`);
+                dispatch(addTask(task));
+            }
+        ).catch(err => console.log(`Error during saveTask operation ,err: ${err}`))
+};
+
+const updateTask = (task, dispatch) => {
+    taskService.updateTask(task)
+        .then(response => {
+                dispatch(getAllTasks());
+                console.log(`Updated task: ${JSON.stringify(response)}`);
+                dispatch(addTask(task));
+            }
+        ).catch(err => console.log(`Error during updateTask operation ,err: ${err}`))
+};
+
 export const saveTask = task => dispatch => {
     userService.getUserByUsername(task.assignedTo)
         .then(user => user.photo)
-        .catch(msg => console.log('User does not exist'))
+        .catch(msg => console.log(`User ${task.assignedTo} does not exist`))
         .then(userPhoto => {
-            task.userImg = userPhoto;
-            if(task._id === undefined) {
-                taskService.createTask(task)
-                    .then(response => {
-                        dispatch(getAllTasks());
-                        console.log(`Added task: ${response}`);
-                        dispatch(addTask(task));
-                })
-                    .catch(err => console.log(`Error during saveTask operation ,err: ${err}`))
+                task.userImg = userPhoto;
+                if(task._id === undefined)
+                    createNewTask(task, dispatch);
+                else
+                    updateTask(task, dispatch);
             }
-            else {
-                taskService.updateTask(task)
-                    .then(response => {
-                        dispatch(getAllTasks());
-                        console.log(`Updated task: ${response}`);
-                        dispatch(addTask(task));
-                })
-                    .catch(err => console.log(`Error during saveTask operation ,err: ${err}`))
-            }
-        })
-
+        ).catch(err => console.log(`Unexpected error during saveTask method\n Error: ${err}`))
 };
 
 export const deleteTask = task => dispatch => {

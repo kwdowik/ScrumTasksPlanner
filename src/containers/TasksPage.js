@@ -14,7 +14,7 @@ const TasksPage = ({tasks, dispatch, history, tabIndex}) => {
     const taskTypeChange = (tabIndex) => {
         if(tabIndex ===  1) dispatch(filterTasks(types.SHOW_DONE));
         else if (tabIndex ===  2) dispatch(filterTasks(types.SHOW_IN_PROGRESS));
-        else dispatch(filterTasks());
+        else dispatch(filterTasks(types.SHOW_ALL));
         dispatch(setTabIndex(tabIndex));
     };
     return (

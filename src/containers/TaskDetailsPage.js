@@ -44,7 +44,7 @@ TaskDetailsPage.propTypes = {
 const mapStateToProps = state => ({
     task: getOneTask(state.tasks),
     editable: getEditableState(state.tasks),
-    projects: getProjects(state)
+    projects: getProjects(state.projects)
 });
 
 export default connect(mapStateToProps)(TaskDetailsPage);

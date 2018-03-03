@@ -7,7 +7,7 @@ import {
 import { View, Text, ScrollView, StyleSheet, Keyboard, Vibration } from 'react-native';
 import { connect } from 'react-redux';
 import { tryRegister, editUserPropertyValue } from "../actions/users.actions"
-import { getUser, isError } from '../reducers/users.reducers';
+import { getUser, getError } from '../reducers/users.reducers';
 import Camera from '../components/Camera';
 
 const SingUpPage = ({history, dispatch, user, errorMessage}) => {
@@ -66,7 +66,7 @@ const SingUpPage = ({history, dispatch, user, errorMessage}) => {
 
 const mapStateToProps = state => ({
     user: getUser(state.users),
-    errorMessage: isError(state.users),
+    errorMessage: getError(state.users),
 });
 
 const styles = StyleSheet.create({

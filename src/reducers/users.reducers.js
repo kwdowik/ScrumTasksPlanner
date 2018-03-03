@@ -55,12 +55,12 @@ export const getUser = state => {
     return state.setUser.user === undefined ? initialState.user : state.setUser.user;
 };
 
-export const isError = state => {
+export const getError = state => {
     console.log(`isUserValid: ${JSON.stringify(state)}`);
     return state.setError.error;
 };
 
-export const isSigningIn = state => {
+export const getSigningIn = state => {
     return state.setUser.isSigningIn;
 };
 

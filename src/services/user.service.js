@@ -26,7 +26,7 @@ const getUserByUsername = username => {
         .catch(err => console.error(err));
 };
 
-const addUser  = user => axios.post(BASE_URL, qs.stringify({
+const addUser = user => axios.post(BASE_URL, qs.stringify({
         username: user.username,
         password: user.password,
         createDate: new Date().toLocaleString(),
@@ -43,27 +43,29 @@ const addUser  = user => axios.post(BASE_URL, qs.stringify({
 const registerUser = user => {
     return isUserAlreadyExist(user.username)
         .then(foundedUser => {
-            if(foundedUser === undefined) {
-                if(user.projectName)
-                    addProject(user.projectName);
-                addUser({
-                    username: user.username,
-                    password: user.password,
-                    projectName: user.projectName,
-                    photo: user.photo
-                });
+                if(foundedUser === undefined) {
+                    if(user.projectName)
+                        addProject(user.projectName);
+                    addUser({
+                        username: user.username,
+                        password: user.password,
+                        projectName: user.projectName,
+                        photo: user.photo
+                    });
+                }
+                return foundedUser;
             }
-            return foundedUser;
-        }).catch(err => {
+        ).catch(err => {
             return err
         });
 };
 
 const isUserAlreadyExist = username => {
     return getUsers().then(users => {
-        let u = users.filter(u => u.username === username);
-        return u[0];
-    }).catch(err => {
+            let u = users.filter(u => u.username === username);
+            return u[0];
+        }
+    ).catch(err => {
         return err
     });
 };
