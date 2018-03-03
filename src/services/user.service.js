@@ -45,7 +45,7 @@ const registerUser = user => {
         .then(foundedUser => {
                 if(foundedUser === undefined) {
                     if(user.projectName)
-                        addProject(user.projectName);
+                        addProject(user.projectName.toLowerCase());
                     addUser({
                         username: user.username,
                         password: user.password,

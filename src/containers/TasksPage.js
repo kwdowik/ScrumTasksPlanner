@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { ScrollView, StyleSheet, View } from 'react-native';
-import { Button, Icon } from 'react-native-elements'
-import BottomNavigation, { Tab } from 'react-native-material-bottom-navigation'
+import { Button } from 'react-native-elements'
 import { connect } from 'react-redux';
 import { TaskList } from '../components/TaskList';
 import { taskDetails, filterTasks, setTabIndex } from '../actions/tasks.actions';
 import { getTasksForCurrentUser, getTabIndex} from '../reducers/tasks.reducers';
 import * as types from '../constans/ActionTypes';
+import {BottomNav} from "../components/BottomNav";
 
 const TasksPage = ({tasks, dispatch, history, tabIndex}) => {
 
-    const taskTypeChange = (tabIndex) => {
+    const taskTypeChanged = (tabIndex) => {
         if(tabIndex ===  1) dispatch(filterTasks(types.SHOW_DONE));
         else if (tabIndex ===  2) dispatch(filterTasks(types.SHOW_IN_PROGRESS));
         else dispatch(filterTasks(types.SHOW_ALL));
@@ -37,26 +37,12 @@ const TasksPage = ({tasks, dispatch, history, tabIndex}) => {
                 title='Add' />
             </View>
             <View style={{flex: 1}}>
-                <BottomNavigation labelColor="white" rippleColor="white" style={styles.bottomNavigation}
-                                      onTabChange={taskTypeChange} activeTab={tabIndex}
-                    >
-                    <Tab
-                        barBackgroundColor='#68c2ee'
-                        label="All"
-                        icon={<Icon size={24} color="white" name="list" />}
-                    />
-                    <Tab
-                        barBackgroundColor='green'
-                        label="Done"
-                        icon={<Icon size={24} color="white" name="done" />}
-                    />
-                    <Tab
-                        barBackgroundColor='orange'
-                        label="In progress"
-                        icon={<Icon size={24} color="white" name="build" />}
-                    />
-                    </BottomNavigation>
-                </View>
+                <BottomNav
+                    onTaskTypeChanged = {taskTypeChanged}
+                    tabIndex = {tabIndex}
+                    styles = {styles}
+                />
+            </View>
         </View>
     );
 };
@@ -75,7 +61,7 @@ TasksPage.propTypes = {
 
 const mapStateToProps = state => ({
     tasks: getTasksForCurrentUser(state),
-    tabIndex: getTabIndex(state)
+    tabIndex: getTabIndex(state.tasks)
 });
 
 export default connect(mapStateToProps)(TasksPage);

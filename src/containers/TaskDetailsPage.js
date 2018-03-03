@@ -4,8 +4,8 @@ import { View, StyleSheet } from 'react-native';
 import { TaskDetails } from '../components/TaskDetails';
 import { connect } from 'react-redux';
 import { saveTask, editTaskPropertyValue, deleteTask } from '../actions/tasks.actions';
-import { getOneTask, getEditableState } from '../reducers/tasks.reducers'
-import { getProjects } from "../reducers/projects.reducers";
+import { getOneTask, getEditableState } from '../reducers/tasks.reducers';
+import { getProjects } from '../reducers/projects.reducers'
 
 const TaskDetailsPage = ({task, projects, editable, dispatch, history}) => {
     const handleDelete = task => {
