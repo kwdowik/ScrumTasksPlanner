@@ -5,7 +5,7 @@ import { Task } from './Task';
 import Link from 'react-router-native/Link';
 import * as types from '../constans/ActionTypes';
 
-export const TaskList = ({tasks, onPress, history}) => (
+export const TaskList = ({tasks, onPress}) => (
     <View>
         <List>
             {
