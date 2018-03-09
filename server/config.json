@@ -1,5 +1,5 @@
 {
-  "environment": "production",
-  "mongo_user": "",
-  "mongo_password": ""
+  "environment": "development",
+  "mongo_user": "admin",
+  "mongo_password": "admin"
 }
