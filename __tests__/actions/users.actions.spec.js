@@ -1,7 +1,7 @@
-import * as actions from '../src/actions/users.actions';
-import * as types from '../src/constans/ActionTypes';
+import * as actions from '../../src/actions/users.actions';
+import * as types from '../../src/constans/ActionTypes';
 
-describe('actions', () => {
+describe('users actions', () => {
     it('should create an action to edit selected user property value', () => {
         const name = 'username';
         const value = 'TestUser';

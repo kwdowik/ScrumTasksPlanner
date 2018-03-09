@@ -1,5 +1,5 @@
-import * as actions from '../src/actions/tasks.actions';
-import * as types from '../src/constans/ActionTypes';
+import * as actions from '../../src/actions/tasks.actions';
+import * as types from '../../src/constans/ActionTypes';
 
 const task = {
     name: 'test_name',
@@ -11,7 +11,7 @@ const task = {
     userImg: 'task_userImg'
 };
 
-describe('actions', () => {
+describe('tasks actions', () => {
     it('should create an action to set tab index', () => {
         const index = 2;
         const expectedAction = {

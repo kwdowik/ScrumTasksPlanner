@@ -1,7 +1,7 @@
-import * as actions from '../src/actions/projects.actions';
-import * as types from '../src/constans/ActionTypes';
+import * as actions from '../../src/actions/projects.actions';
+import * as types from '../../src/constans/ActionTypes';
 
-describe('actions', () => {
+describe('projects actions', () => {
  it('should create an action to receive projects', () =>{
      const projects = [{}];
      const expectedAction = {
