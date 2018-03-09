@@ -1,5 +1,5 @@
-import reducer from '../src/reducers/projects.reducers'
-import * as types from '../src/constans/ActionTypes'
+import reducer from '../../src/reducers/projects.reducers'
+import * as types from '../../src/constans/ActionTypes'
 
 const state = {
     projects: []
@@ -7,7 +7,7 @@ const state = {
 
 describe('projects reducer', () => {
     it('should return the initial sate - getAllProjects', () => {
-        expect(reducer(undefined, {}).setProjects).toEqual(
+        expect(reducer(undefined, {})).toEqual(
             state
         );
     });
@@ -20,7 +20,7 @@ describe('projects reducer', () => {
         expect(reducer(undefined, {
             type: types.RECEIVE_PROJECTS,
             projects: state.projects
-        }).setProjects).toEqual(
+        })).toEqual(
             state
         );
     });
