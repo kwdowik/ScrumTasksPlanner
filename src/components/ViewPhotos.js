@@ -25,7 +25,7 @@ class ViewPhotos extends Component {
             <TouchableHighlight
                 onPress={() => {
                     this.setState({ photoSelected: true, uri: uri });
-                    this.props.selectedPhoto(uri)
+                    this.props.onSelectedPhoto(uri)
                 }}>
                 <Image
                     source={{ uri: rowData.node.image.uri }}
@@ -43,7 +43,7 @@ class ViewPhotos extends Component {
                 <ListView
                     contentContainerStyle={styles.list}
                     dataSource={this.state.ds.cloneWithRows(this.props.photoArray)}
-                    renderRow={(rowData) => this.renderRow(rowData)}
+                    renderRow={this.renderRow}
                     enableEmptySections={true} />
             </View>
         );

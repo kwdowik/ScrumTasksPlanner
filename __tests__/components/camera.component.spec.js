@@ -7,7 +7,7 @@ import Camera from "../../src/components/Camera";
 
 configure({ adapter: new Adapter() });
 
-const mockHandleSelectedPhoto = () => {};
+const mockHandleSelectedPhoto = uri => {};
 
 const props = {
     selectedPhoto: mockHandleSelectedPhoto,
@@ -15,21 +15,29 @@ const props = {
     buttonStyle: {backgroundColor: '#68c2ee'}
 };
 
-// jest.mock('CameraRoll', () => {
-//     return {
-//         getPhotos: jest.fn(),
-//     };
-// });
+const setup = () => (
+    shallow(<Camera {...props} />
+    )
+);
 
 describe('Testing Camera component', () => {
-    it('renders correctly', () => {
-        const wrapper = shallow(
-            <Camera {...props} />
-        );
+    it('renders correctly - showPhotoGallery: true', () => {
+        const wrapper = setup();
+        wrapper.setState({showPhotoGallery: true});
+
         const render = wrapper.dive();
         render.find('ViewPhotos').forEach(child => {
-            child.simulate('selectedPhoto');
+            child.simulate('SelectedPhoto');
         });
+
         expect(wrapper).toMatchSnapshot();
     });
+
+    it('renders correctly - showPhotoGallery: false', () => {
+        const wrapper = setup();
+        const render = wrapper.dive();
+
+        // render.find('Button').last().simulate('press');
+
+    })
 });

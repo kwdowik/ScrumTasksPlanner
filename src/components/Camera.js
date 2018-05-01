@@ -23,7 +23,7 @@ class Camera extends Component {
             return (
                 <ViewPhotos
                     photoArray={this.state.photoArray}
-                    selectedPhoto={(uri) => {
+                    onSelectedPhoto={(uri) => {
                         this.setState({showPhotoGallery: false});
                         this.props.selectedPhoto(uri)
                     }}

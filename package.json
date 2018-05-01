@@ -12,7 +12,7 @@
     "transformIgnorePatterns": [
       "node_modules/(?!react-native|react-navigation)/"
     ],
-    "collectCoverage": true,
+    "collectCoverage": false,
     "coverageFormats": [
       "json",
       "html"
